@@ -1,0 +1,49 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "hello_world_c debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${fileDirname}",
+            "program": "${workspaceFolder}/build/bin/hello_world_c",
+            "miDebuggerPath": "gdb"
+        },
+        {
+            "name": "hello_world_cpp debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${fileDirname}",
+            "program": "${workspaceFolder}/build/bin/hello_world_cpp"
+        },
+        {
+            "name": "test_helloworld debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${fileDirname}",
+            "program": "${workspaceFolder}/build/test/test_helloworld"
+        },
+        {
+            "name": "test_somefunctions debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${fileDirname}",
+            "program": "${workspaceFolder}/build/test/test_somefunctions"
+        },
+        {
+            "name": "helloworld.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/hellopython/helloworld.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Debug Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            //"args": "${command:pickArgs}"
+        }
+    ]
+}
