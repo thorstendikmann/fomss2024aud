@@ -1,0 +1,20 @@
+[package]
+name = "helloworld"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "helloworld"
+path = "src/main.rs"
+test = false
+bench = false
+
+[[bin]]
+name = "random"
+path = "src/random.rs"
+test = false
+bench = false
+
+[dependencies]
+hellolib = { path = "../hellolib" }
+rand = "0.8.5"

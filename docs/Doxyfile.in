@@ -1,0 +1,31 @@
+PROJECT_NAME           = @CMAKE_PROJECT_NAME@
+PROJECT_NUMBER         = @CMAKE_PROJECT_VERSION@
+PROJECT_BRIEF          = @CMAKE_PROJECT_DESCRIPTION@
+
+OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/doc/
+INPUT                  = @PROJECT_SOURCE_DIR@/
+QUIET                  = YES
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+GENERATE_LATEX         = NO
+USE_MATHJAX            = YES
+
+SOURCE_BROWSER         = YES
+VERBATIM_HEADERS       = YES
+
+SORT_MEMBER_DOCS       = NO
+SORT_GROUP_NAMES       = NO
+SORT_BY_SCOPE_NAME     = NO
+
+JAVADOC_AUTOBRIEF      = YES
+OPTIMIZE_OUTPUT_JAVA   = YES
+
+TOC_INCLUDE_HEADINGS   = 1
+
+EXCLUDE_PATTERNS       = */.svn/* \
+                         */docs/* \
+                         */published/* \
+                         */bin/* \
+                         */build/* \
+                         */obj/* \
+                         */target/*

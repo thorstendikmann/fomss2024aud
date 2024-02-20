@@ -1,5 +1,3 @@
-project(HelloWorld)
-
 add_executable(hello_world_cpp helloworld.cpp)
 install(TARGETS hello_world_cpp DESTINATION bin)
 
