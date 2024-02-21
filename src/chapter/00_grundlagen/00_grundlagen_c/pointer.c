@@ -6,23 +6,23 @@
  */
 void simplePointer()
 {
-    printf("- %s, %d\n", __FUNCTION__, __LINE__);
-    
+    printf("- %s, %d\n", __func__, __LINE__);
+
     int a = 16;
     int b = 32;
     int c = 48;
     int *numPtr = 0;
 
-    printf("numPtr points to adress %p\n", numPtr);
+    printf("numPtr points to adress %p\n", (void*) numPtr);
 
     numPtr = &a;
-    printf("numPtr points to adress %p - value %d\n", numPtr, *numPtr);
+    printf("numPtr points to adress %p - value %d\n", (void*) numPtr, *numPtr);
 
     numPtr = &b;
-    printf("numPtr points to adress %p - value %d\n", numPtr, *numPtr);
+    printf("numPtr points to adress %p - value %d\n", (void*) numPtr, *numPtr);
 
     numPtr = &c;
-    printf("numPtr points to adress %p - value %d\n", numPtr, *numPtr);
+    printf("numPtr points to adress %p - value %d\n", (void*) numPtr, *numPtr);
 }
 
 /**
@@ -30,13 +30,13 @@ void simplePointer()
  */
 void simplePointerWithChar()
 {
-    printf("- %s, %d\n", __FUNCTION__, __LINE__);
+    printf("- %s, %d\n", __func__, __LINE__);
 
     char a = 16;
     char *numPtr = 0;
 
     numPtr = &a;
-    printf("numPtr points to adress %p - value %d\n", numPtr, *numPtr);
+    printf("numPtr points to adress %p - value %d\n", (void*) numPtr, *numPtr);
 
     // numPtr++; // This points numPtr to the next memory element ... whatever this means ...
     // printf("numPtr points to adress %p - value %d\n", numPtr, *numPtr);
@@ -48,7 +48,7 @@ void simplePointerWithChar()
  */
 void pointerUsage()
 {
-    printf("- %s, %d\n", __FUNCTION__, __LINE__);
+    printf("- %s, %d\n", __func__, __LINE__);
 
     int MAX_ELEM = 10;
 
@@ -65,18 +65,18 @@ void pointerUsage()
     // Set to first element
     pos = numbs;
 
-    printf("numbs points to adress %p - value %d\n", numbs, *numbs);
-    printf("pos points to adress %p - value %d\n", pos, *pos);
+    printf("numbs points to adress %p - value %d\n", (void*) numbs, *numbs);
+    printf("pos points to adress %p - value %d\n", (void*) pos, *pos);
 
     // Stepwise, manually increment pointer
     pos++;
-    printf("pos points to adress %p - value %d\n", pos, *pos);
+    printf("pos points to adress %p - value %d\n", (void*) pos, *pos);
     pos++;
-    printf("pos points to adress %p - value %d\n", pos, *pos);
+    printf("pos points to adress %p - value %d\n", (void*) pos, *pos);
     pos++;
-    printf("pos points to adress %p - value %d\n", pos, *pos);
+    printf("pos points to adress %p - value %d\n", (void*) pos, *pos);
     pos++;
-    printf("pos points to adress %p - value %d\n", pos, *pos);
+    printf("pos points to adress %p - value %d\n", (void*) pos, *pos);
 }
 
 /**
@@ -84,7 +84,7 @@ void pointerUsage()
  */
 void pointerArithmeticsMultiDim()
 {
-    printf("- %s, %d\n", __FUNCTION__, __LINE__);
+    printf("- %s, %d\n", __func__, __LINE__);
 
     // Define and fill the array
     int maxElem = 15;
@@ -108,14 +108,14 @@ void pointerArithmeticsMultiDim()
         printf("\n");
     }
 
-    printf("    x   points to adress %p - value %d\n", x, x[0][0]);
+    printf("    x   points to adress %p - value %d\n", (void*) x, x[0][0]);
     // Iterate with pointer over diagonal elements
     for (int i = 0; i < maxElem; i++)
     {
         // Calculate the position
         //        -------------v start ----v row -----v column
         int *pos = (int *)(&x[0][0] + (i * maxElem) + i);
-        printf("%d - pos points to adress %p - value %d\n", i, pos, *pos);
+        printf("%d - pos points to adress %p - value %d\n", i, (void*) pos, *pos);
     }
 }
 
@@ -137,7 +137,7 @@ int myOwnStrleng(const char *s)
  */
 void stringMagic()
 {
-    printf("- %s, %d\n", __FUNCTION__, __LINE__);
+    printf("- %s, %d\n", __func__, __LINE__);
 
     const char *str01 = "Hello World!";
     printf("The length of str \"%s\" is: %d\n", str01, myOwnStrleng(str01));
@@ -152,13 +152,15 @@ void stringMagic()
  */
 void memoryLeaker()
 {
-    printf("- %s, %d\n", __FUNCTION__, __LINE__);
+    printf("- %s, %d\n", __func__, __LINE__);
 
     char *str01;
     for (int i = 0; i < 10; i++)
     {
         // We reserve some memory for our string ...
-        str01 = (char *)malloc(25 * sizeof(char));
+        // ... I have a tendency to cast to (char *) - this would be more C++, though
+        // See Stroustrup, appendix B on compatibility.
+        str01 = malloc(25 * sizeof(char));
         sprintf(str01, "Some text - %d\n", i);
         printf("%s", str01);
     }
@@ -172,10 +174,12 @@ void memoryLeaker()
  */
 void uebung_SpeicherverwaltungInC()
 {
-    printf("- %s, %d\n", __FUNCTION__, __LINE__);
+    printf("- %s, %d\n", __func__, __LINE__);
 
     int *anotherPtr;
-    int *iPtr = (int *)malloc(5 * sizeof(int));
+    // ... I have a tendency to cast to (int *) - this would be more C++, though
+    // See Stroustrup, appendix B on compatibility.
+    int *iPtr = malloc(5 * sizeof(int));
     *iPtr++ = 10;
     *iPtr++ = 11;
     *iPtr++ = 12;

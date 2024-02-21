@@ -1,0 +1,1 @@
+td_add_all_subdirectories()

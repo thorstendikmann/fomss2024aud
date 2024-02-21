@@ -25,6 +25,8 @@ int convertFahrenheitToCelcius()
 	c = ((f-32)*5)/9;
 
 	printf("%f degree Fahrenheit is %f degree Celcius.", f, c);
+
+	return 0;
 }
 
 int main()

@@ -28,13 +28,13 @@ apt-get install doxygen graphviz
 - If docker is used, the "host" Linux only needs to have docker installed.
 - [Install Docker Desktop on Linux](https://docs.docker.com/desktop/install/linux-install/)
 
-### Docker - Windows with WSL
+### Docker - Windows with WSL (+Ubuntu/Debian)
 
 - [Docker Desktop WSL 2 backend on Windows](https://docs.docker.com/desktop/wsl/)
 - [Get started with Docker remote containers on WSL 2](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers)
 - In the WSL guest system:
 ```
-aptitude install docker
+apt-get install docker
 ```
 
 ## Building and running the software

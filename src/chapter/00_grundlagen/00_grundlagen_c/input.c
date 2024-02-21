@@ -55,6 +55,7 @@ void fgetsString()
 
 int main()
 {
+    printf("Uncomment parts in source code.\n");
 	// // Uncomment
 	// countChars();
 	// scanfInt();

@@ -90,9 +90,9 @@ RUN     apk --no-cache add libc6-compat libstdc++
 RUN     apk add --no-cache valgrind
 RUN     apk add --no-cache python3 py3-pip
 
-## No Cache from here
-## Add "no cache" command: see https://stackoverflow.com/questions/35134713/disable-cache-for-specific-run-commands
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+### No Cache from here
+### Add "no cache" command: see https://stackoverflow.com/questions/35134713/disable-cache-for-specific-run-commands
+#ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 
 COPY    --from=buildenv /buildenv/destdir /app
 COPY    --from=buildenv /buildenv/app/src /app/src

@@ -139,7 +139,7 @@ void display_binary(int n)
 
 	while (n)
 	{
-		if (n & 0b1)
+		if (n & 0x01)
 			arr[++top] = 1;
 		else
 			arr[++top] = 0;
@@ -153,27 +153,29 @@ void display_binary(int n)
 	}
 	printf("\n");
 }
+
 /**
  * Prints the result of some binary operations in C.
  */
 void bitwiseOperations()
 {
-	int size = sizeof(int);
+	// 11111111 -> 0xFF || 0b1011 -> 0x0B
+	printf("11111111 & 0b1011 -> ");
+	display_binary(0xFF & 0x0B);
 
-	printf("0b011111111 & 0b1011 -> ");
-	display_binary(0b11111111 & 0b1011);
-
+	// 0b010101010 -> 0xAA
 	printf("0b010101010 | 0b1011 -> ");
-	display_binary(0b10101010 | 0b1011);
+	display_binary(0xAA | 0x0B);
 
 	printf("0b010101010 ^ 0b1011 -> ");
-	display_binary(0b10101010 ^ 0b1011);
+	display_binary(0xAA ^ 0x0B);
 
+	// 0b11101010 -> 0xEA
 	printf("0b11101010 << 2 -> ");
-	display_binary(0b11101010 << 2);
+	display_binary(0xEA << 2);
 
 	printf("0b11101010 >> 3 -> ");
-	display_binary(0b11101010 >> 3);
+	display_binary(0xEA >> 3);
 
 	printf("0xFFFF << 2 -> ");
 	display_binary(0xFFFF << 2);
@@ -224,9 +226,9 @@ void preprocessorMacros()
  */
 void errorHandling()
 {
-	int destInt;
+	int destInt = 0;
 	char sentence[] = "This does not contain a number.";
-	int result = sscanf(sentence, "%d", destInt);
+	int result = sscanf(sentence, "%d", &destInt);
 	if (result)
 		printf("Found a number: \"%d\"", destInt);
 	else

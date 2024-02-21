@@ -1,3 +1,4 @@
+// See Kernighan & Ritchie, The C Programming Language, Prentice Hall, 1988.
 #include <stdio.h>
 #include <stdlib.h> // for atof()
 #include <ctype.h>
@@ -53,7 +54,7 @@ int main()
         case '\n':
             printf("\t%.8g\n", pop());
             break;
-        dfault:
+        default:
             printf("error: unknown command %s\n", s);
             break;
         }

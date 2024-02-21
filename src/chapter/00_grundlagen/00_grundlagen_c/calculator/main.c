@@ -1,3 +1,4 @@
+// See Kernighan & Ritchie, The C Programming Language, Prentice Hall, 1988.
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h> // for atof()
@@ -94,7 +95,9 @@ int strindex(char s[], char t[])
 
 void mathfunc(char s[])
 {
-    int index;
+    // warning: unused variable ‘index’
+    //int index;
+    
     // strindex, not strrindex
     if (0 == strindex(s, "sin"))
     {
