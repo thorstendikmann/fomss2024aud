@@ -54,8 +54,8 @@ then
     /app/bin/c00/input
     /app/bin/c00/structs
     /app/bin/c00/arrays
-    /app/bin/c00/fahrenheit
-    valgrind -q --leak-check=full -s /app/bin/c00/00_pointer
+    #/app/bin/c00/fahrenheit
+    valgrind -q --leak-check=full -s /app/bin/c00/pointer
 
     /app/bin/c00/cpp_simplefunctions
     /app/bin/c00/cpp_classes
