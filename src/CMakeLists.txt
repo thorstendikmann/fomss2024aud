@@ -59,7 +59,7 @@ set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED OFF)
 set(Boost_USE_STATIC_RUNTIME OFF)
 # Replace "ALL" - Add only needed components
-find_package(Boost 1.74 REQUIRED COMPONENTS ALL)
+find_package(Boost 1.74 COMPONENTS ALL)
 
 ## Google Test
 find_package(GTest)

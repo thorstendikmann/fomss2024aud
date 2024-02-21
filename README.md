@@ -114,20 +114,32 @@ cargo run --bin hellorust
 - Ensure you have a local ssh key in `~/.ssh/id_ed25519.pub`.
 - Running Terraform to setup a build environment:
 ```
+cd  terraform
+terraform init
 terraform plan
 terraform apply -auto-approve
 # terraform destroy
 ```
 - This should setup a "plain" build environment with an installed docker.
 - At the end of the script, the `instance_public_ip_addr` will be displayed. Then you can login:
-`
+```
 ssh admin@<xx.yyy.zz.dd>
 // and remote:
 mkdir workspace && cd workspace
 git clone https://github.com/thorstendikmann/fomss2024aud.git
 cd fomss2024aud/
+```
+- ... and build:
+```
+mkdir build && cd build
+cmake ..
+make
+```
+- ... or via Docker:
+```
+cd ~/workspace/fomss2024aud
 make docker
-`
+```
 
 # References
 
