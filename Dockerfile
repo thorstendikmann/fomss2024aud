@@ -18,7 +18,6 @@ RUN     apt-get -qy install --no-install-recommends \
         build-essential \
         g++-multilib \
         locales \
-        make \
         wget \
         bash \
         curl
@@ -70,8 +69,13 @@ RUN     mkdir -p $buildroot &&\
 
 COPY    . $appdir
 
+## We skip rust and asm here to speedup the process
+##  -DWITH_RUST=ON -DWITH_ASM=ON
 RUN     cd $builddir && \
-        cmake $appdir -DCMAKE_INSTALL_PREFIX=/ && \
+        cmake $appdir \
+          -DCMAKE_INSTALL_PREFIX=/ \
+          -DWITH_DOC=ON -DWITH_GTEST=ON \
+          -DWITH_BOOST=ON && \
         make && \
         make install DESTDIR=$destdir &&\
         rm $builddir -Rf

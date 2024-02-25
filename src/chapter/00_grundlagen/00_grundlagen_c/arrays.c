@@ -3,7 +3,7 @@
 /**
  * Just defining and filling a 1D array with some elements and printing them afterwards.
  */
-void arrays1d()
+void arrays1d(void)
 {
     int MAX_ELEM = 6;
     float measurements[MAX_ELEM];
@@ -27,7 +27,7 @@ void arrays1d()
 /**
  * Calculate the length of an array.
  */
-void arraysLength()
+void arraysLength(void)
 {
     float measurements[3];
 
@@ -47,7 +47,7 @@ void arraysLength()
 /**
  * Show usage of 2D arrays in C - iterate over them, put some values in and print the final result.
  */
-void arrays2d()
+void arrays2d(void)
 {
     int max_x = 15;
     int max_y = 15;
@@ -72,7 +72,7 @@ void arrays2d()
     }
 }
 
-int main()
+int main(void)
 {
     arrays1d();
     arraysLength();

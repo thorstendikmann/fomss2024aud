@@ -15,7 +15,7 @@ void getVar(char[]);
 double variables[MAX_VAR_LEN];
 int variableFlags[MAX_VAR_LEN]; // if [0] is 0, means 'a' not set, if [0] is 1, means 'a' set
 
-int main()
+int main(void)
 {
     int type;
     double op2;

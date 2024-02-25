@@ -4,7 +4,7 @@
 /**
  * Illustrates, how to define, assign and reference a pointer.
  */
-void simplePointer()
+void simplePointer(void)
 {
     printf("- %s, %d\n", __func__, __LINE__);
 
@@ -28,7 +28,7 @@ void simplePointer()
 /**
  * Illustrate example from slides - pointer to char.
  */
-void simplePointerWithChar()
+void simplePointerWithChar(void)
 {
     printf("- %s, %d\n", __func__, __LINE__);
 
@@ -46,7 +46,7 @@ void simplePointerWithChar()
  * Do some pointer arithmetics.
  * Stepwise increase one pointer and see what happens to its address and the dereferenced value.
  */
-void pointerUsage()
+void pointerUsage(void)
 {
     printf("- %s, %d\n", __func__, __LINE__);
 
@@ -82,7 +82,7 @@ void pointerUsage()
 /**
  * Pointer arithmetics shown by diagonally iterating through a two-dimensional array.
  */
-void pointerArithmeticsMultiDim()
+void pointerArithmeticsMultiDim(void)
 {
     printf("- %s, %d\n", __func__, __LINE__);
 
@@ -135,7 +135,7 @@ int myOwnStrleng(const char *s)
 /**
  * Calls the function myOwnStrleng(const char *s)
  */
-void stringMagic()
+void stringMagic(void)
 {
     printf("- %s, %d\n", __func__, __LINE__);
 
@@ -150,7 +150,7 @@ void stringMagic()
  * Function to intentionally create a memory leak.
  * Check with valgrind (https://valgrind.org/)!
  */
-void memoryLeaker()
+void memoryLeaker(void)
 {
     printf("- %s, %d\n", __func__, __LINE__);
 
@@ -172,7 +172,7 @@ void memoryLeaker()
 /**
  * Solution suggestion for the excercise for memory management.
  */
-void uebung_SpeicherverwaltungInC()
+void uebung_SpeicherverwaltungInC(void)
 {
     printf("- %s, %d\n", __func__, __LINE__);
 
@@ -192,7 +192,7 @@ void uebung_SpeicherverwaltungInC()
     }
 }
 
-int main()
+int main(void)
 {
     simplePointer();
     simplePointerWithChar();

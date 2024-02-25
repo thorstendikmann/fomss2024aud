@@ -21,7 +21,7 @@ char buf[BUFSIZE];  // buffer for ungetch
 int bufp = 0;       // next free position in buffer
 
 /* reverse Polish calculator */
-int main()
+int main(void)
 {
     int type;
     double op2;

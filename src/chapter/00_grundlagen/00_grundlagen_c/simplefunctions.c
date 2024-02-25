@@ -1,13 +1,13 @@
 #include <stdio.h>
 
-void simplePrints()
+void simplePrints(void)
 {
 	printf("String: %s\n", "a string");
 	printf("Int: %i\n", 42);
 	printf("Float: %f\n", 33.33);
 }
 
-void simpleVariables()
+void simpleVariables(void)
 {
 	char *telnummer;
 	telnummer = "02513315";
@@ -16,7 +16,7 @@ void simpleVariables()
 }
 
 #include <math.h>
-void simpleArithmetic()
+void simpleArithmetic(void)
 {
 	int answer = 46 - 4;
 	printf("... the answer to life, the universe and everything - %d\n", answer);
@@ -27,7 +27,7 @@ void simpleArithmetic()
 
 #include <stdlib.h>
 #include <time.h>
-void simpleBranch()
+void simpleBranch(void)
 {
 	srand(time(NULL)); // <- <time.h>, init randomizer
 	int num = rand() % 10;
@@ -44,7 +44,7 @@ void simpleBranch()
 
 #include <stdlib.h>
 #include <time.h>
-void simpleSwitch()
+void simpleSwitch(void)
 {
 	srand(time(NULL));
 	// 65 = 'A', 66 = 'B' ... ASCII !!
@@ -95,7 +95,7 @@ void simpleLoops(int maxRuns)
 /**
  * Print the size in bytes of common datatypes.
  */
-void sizeOfs()
+void sizeOfs(void)
 {
 	printf("The size of char is %d byte\n", (int)sizeof(char));
 	printf("The size of short is %d bytes\n", (int)sizeof(short));
@@ -110,7 +110,7 @@ void sizeOfs()
  * Print degrees in Celcius and Fahrenheit.
  * Inspired by: The C Programming Language, Brian W. Kernighan, Dennis M. Ritchie, 1988
  */
-void c_fahrenheit()
+void c_fahrenheit(void)
 {
 	int fahr, celsius;
 	int lower, upper, step;
@@ -157,7 +157,7 @@ void display_binary(int n)
 /**
  * Prints the result of some binary operations in C.
  */
-void bitwiseOperations()
+void bitwiseOperations(void)
 {
 	// 11111111 -> 0xFF || 0b1011 -> 0x0B
 	printf("11111111 & 0b1011 -> ");
@@ -186,7 +186,7 @@ void bitwiseOperations()
  * Demonstration of the goto command - which almost never should be used.
  * See: https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf
  */
-void gotoConsideredHarmful()
+void gotoConsideredHarmful(void)
 {
 	int i, j, k;
 	// Deeply nested loop .. jump out early when conditions met.
@@ -212,7 +212,7 @@ OUT:
 /**
  * Shows how preprocessor macros can be used.
  */
-void preprocessorMacros()
+void preprocessorMacros(void)
 {
 	float a = VALUE;
 	printf("a has the value: %f\n", a);
@@ -224,7 +224,7 @@ void preprocessorMacros()
 /**
  * Example for error handling in C based on return code.. There are no Exceptions in C!!
  */
-void errorHandling()
+void errorHandling(void)
 {
 	int destInt = 0;
 	char sentence[] = "This does not contain a number.";
@@ -239,7 +239,7 @@ void errorHandling()
 /**
  * A bit more sophisticated error handling with errno.
  */
-void errorHandlingWithErrno()
+void errorHandlingWithErrno(void)
 {
 	FILE *file;
 	file = fopen("iDoNotExist.txt", "r");
@@ -254,7 +254,7 @@ void errorHandlingWithErrno()
 		fclose(file);
 }
 
-int main()
+int main(void)
 {
 	simplePrints();
 	simpleVariables();

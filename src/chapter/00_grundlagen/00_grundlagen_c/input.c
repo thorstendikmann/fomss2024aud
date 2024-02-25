@@ -3,7 +3,7 @@
 /**
  * Function will ask for user input and count characters.
  */
-void countChars()
+void countChars(void)
 {
 	long nc;
 
@@ -19,7 +19,7 @@ void countChars()
 /**
  * Demo of using scanf for reading int and char from user input.
  */
-void scanfInt()
+void scanfInt(void)
 {
 	int myNum;
 	char myChar;
@@ -32,7 +32,7 @@ void scanfInt()
 /**
  * Demo of using scanf for reading single word from user input.
  */
-void scanfString()
+void scanfString(void)
 {
 	char name[20];
 	printf("Gebe Name ein (max 20 Zeichen!!): \n");
@@ -44,7 +44,7 @@ void scanfString()
 /**
  * Demo of using fgets for reading multiple words from user input.
  */
-void fgetsString()
+void fgetsString(void)
 {
 	char fullName[30];
 	printf("Gebe Vorname und Nachname ein (max 30 Zeichen!!): \n");
@@ -53,7 +53,7 @@ void fgetsString()
 	printf("Eingabe: %s\n", fullName);
 }
 
-int main()
+int main(void)
 {
     printf("Uncomment parts in source code.\n");
 	// // Uncomment

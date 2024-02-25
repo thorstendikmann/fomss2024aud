@@ -7,8 +7,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(CMAKE_C_FLAGS "-g -Wall -Wextra -pedantic")
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -pedantic")
+set(CMAKE_C_FLAGS "-g -Wall -Wextra -pedantic -Werror -Wstrict-prototypes")
+set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -pedantic -Werror")
 
 MESSAGE(STATUS "CMAKE_BUILD_TYPE       = ${CMAKE_BUILD_TYPE}")
 MESSAGE(STATUS "CMAKE_INSTALL_PREFIX   = ${CMAKE_INSTALL_PREFIX}")
@@ -55,14 +55,20 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/run.sh DESTINATION bin
 )
 
 ## Boost
-set(Boost_USE_STATIC_LIBS OFF)
-set(Boost_USE_MULTITHREADED OFF)
-set(Boost_USE_STATIC_RUNTIME OFF)
-# Replace "ALL" - Add only needed components
-find_package(Boost 1.74 COMPONENTS ALL)
+if(WITH_BOOST)
+    message("-- Searching for Boost libraries")
+    set(Boost_USE_STATIC_LIBS OFF)
+    set(Boost_USE_MULTITHREADED OFF)
+    set(Boost_USE_STATIC_RUNTIME OFF)
+    # Replace "ALL" - Add only needed components
+    find_package(Boost 1.74 REQUIRED COMPONENTS ALL)
+endif(WITH_BOOST)
 
 ## Google Test
-find_package(GTest)
+if(WITH_GTEST)
+    message("-- Searching for GTest libraries")
+    find_package(GTest REQUIRED)
+endif(WITH_GTEST)
 
 add_subdirectory(helloworlds)
 add_subdirectory(chapter)

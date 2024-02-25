@@ -9,7 +9,7 @@
  * 
  * @return 1 in case of errors.
  */
-int convertFahrenheitToCelcius()
+int convertFahrenheitToCelcius(void)
 {
 	float f;
 	float c;
@@ -29,7 +29,7 @@ int convertFahrenheitToCelcius()
 	return 0;
 }
 
-int main()
+int main(void)
 {
 	return convertFahrenheitToCelcius();
 }

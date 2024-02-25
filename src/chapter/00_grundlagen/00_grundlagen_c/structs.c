@@ -13,7 +13,7 @@ struct address
 /**
  * Illustrates how to use the previously defined struct "address".
  */
-void structUsage()
+void structUsage(void)
 {
     struct address addressInstance;
 
@@ -31,7 +31,7 @@ void structUsage()
     printf("Struct city: %s\n", addressInstance.city);
 }
 
-int main()
+int main(void)
 {
     structUsage();
     return 0;
