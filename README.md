@@ -4,6 +4,8 @@ This repository contains material and source code examples corresponding to the 
 
 The source code can be compiled "traditionally" utilizing CMake or conveniently compiled and executed in a Docker container.
 
+**Table of Contents**
+
 <!-- 
 Updating toc:
 cd ~ && npm install doctoc
@@ -43,6 +45,7 @@ Any reasonably recent Debian version or Debian-based system like Ubuntu or Linux
 
 - Most notably, a C/C++ development environemt needs to be installed. Luckily, Debian covers most of if in the package `build-essential`.
 ```console
+# sudo or do as user `root`
 apt-get install cmake build-essential
 ```
 - There are some libraries and tools we utilize, so let's install them, too. _Note:_ You could skip these for now and look in the [recommended addons](#recommended-addons) section below for the details.
@@ -90,7 +93,7 @@ cmake ..
 cmake .. -DWITH_GTEST=ON -DWITH_BOOST=ON
 
 make
-bin/hello_world_c
+bin/hello/hello_world_c
 ```
 
 ### With docker
