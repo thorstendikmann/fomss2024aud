@@ -4,6 +4,8 @@ This repository contains material and source code examples corresponding to the 
 
 The source code can be compiled "traditionally" utilizing CMake or conveniently compiled and executed in a Docker container.
 
+Any reasonably recent Debian version or Debian-based system like Ubuntu or Linux Mint will be suitable for this guide, either running directly on the computer or within the "Windows Subsystem for Linux".
+
 **Table of Contents**
 
 <!-- 
@@ -15,101 +17,209 @@ cd ~ && npm install doctoc
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [README](#readme)
+
+- [Quick Start: Local Build on Commandline](#quick-start-local-build-on-commandline)
+  - [Clone Repository](#clone-repository)
   - [Local Build Requirements](#local-build-requirements)
-  - [Docker-based Build Requirements](#docker-based-build-requirements)
-    - [Docker in "native" Linux](#docker-in-native-linux)
-    - [Docker - Windows with WSL (+Ubuntu/Debian)](#docker---windows-with-wsl-ubuntudebian)
-  - [Building and running the software](#building-and-running-the-software)
-    - [Without docker](#without-docker)
-    - [With docker](#with-docker)
+  - [Local Build Execution](#local-build-execution)
+  - [Add own source code](#add-own-source-code)
+- [Interacting with the repository](#interacting-with-the-repository)
+  - [Cleaning the build folder](#cleaning-the-build-folder)
+  - [Getting updates](#getting-updates)
+  - [Reverting local changes](#reverting-local-changes)
+- [Integrated Development Environment](#integrated-development-environment)
+  - [Running CMake in Visual Studio Code](#running-cmake-in-visual-studio-code)
+  - [Running Programs in VS Code](#running-programs-in-vs-code)
+- [Optional parts](#optional-parts)
   - [Recommended addons](#recommended-addons)
     - [Boost](#boost)
     - [GoogleTest](#googletest)
-  - [Optional parts](#optional-parts)
-    - [Assembler \& Qemu](#assembler--qemu)
+    - [Valgrind](#valgrind)
+  - [Docker-based Build Environment](#docker-based-build-environment)
+    - [Installing Docker](#installing-docker)
+    - [Building and Executing](#building-and-executing)
+  - [Playgrounds](#playgrounds)
+    - [Assembler & Qemu](#assembler--qemu)
     - [Rust](#rust)
     - [Terraform](#terraform)
-  - [References](#references)
-    - [Examples and some additional literature:](#examples-and-some-additional-literature)
-    - [Toolchain](#toolchain)
+- [References](#references)
+  - [Examples and some additional literature:](#examples-and-some-additional-literature)
+  - [Toolchain](#toolchain)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Local Build Requirements
+## Quick Start: Local Build on Commandline
 
-This section describes how to compile and run the source code directly on the computer without any additional container.
+The following steps describe the minimal environment to download, compile and run the examples from this repository - and how to create own build targets.
+No IDE is required yet, it all works on the commandline.
 
-<!-- ### Debian(-based) Linux & Windows with WSL -->
+### Clone Repository
 
-Any reasonably recent Debian version or Debian-based system like Ubuntu or Linux Mint will be suitable for this guide, either running directly on the computer or within the "Windows Subsystem for Linux".
+This section describes, how to "clone" all the files in this reporitoy to have them available locally.
 
-- Most notably, a C/C++ development environemt needs to be installed. Luckily, Debian covers most of if in the package `build-essential`.
+- First, we need git for it - so let's install it:
 ```sh
 # sudo or do as user `root`
-apt-get install cmake build-essential
+apt-get install git
 ```
-- There are some libraries and tools we utilize, so let's install them, too. _Note:_ You could skip these for now and look in the [recommended addons](#recommended-addons) section below for the details.
-
+- Then as "normal" user (not root!) clone this repository locally. _Note:_ This is cloning via https Web URL. Alternatively, ssh could be used.
 ```sh
-apt-get install gdb
-apt-get install googletest libgtest-dev
-apt-get install libboost-all-dev
+# cd to your local workspace folder of choice
+git clone https://github.com/thorstendikmann/fomss2024aud.git
 ```
-- If you want to utilize the doxygen-generated documentation:
+
+### Local Build Requirements
+
+This section describes how to compile and run the source code directly on the computer.
+
+- Most notably, a C/C++ compiler suite needs to be installed. Luckily, Debian covers most of if in the package `build-essential`. We additionally need `cmake` and the `gdb` Debugger.
 ```sh
-apt-get install doxygen graphviz
-```
-- For memory (leak) checking
-```sh
-apt-get install valgrind
+# sudo or do as user `root`
+apt-get install cmake build-essential gdb
 ```
 
-## Docker-based Build Requirements
+### Local Build Execution
 
-### Docker in "native" Linux
+This describes how to compile the source code files in this repository and execute examples.
 
-- The "host" system only needs to have docker installed.
-- [Install Docker Desktop on Linux](https://docs.docker.com/desktop/install/linux-install/)
-
-### Docker - Windows with WSL (+Ubuntu/Debian)
-
-- With WSL, it's a bit trickyer - we need to install Docker in Windows, first. There is documentation on how to do that:
-    - [Docker Desktop WSL 2 backend on Windows](https://docs.docker.com/desktop/wsl/)
-    - [Get started with Docker remote containers on WSL 2](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers)
-- In the WSL Linux guest system:
-```sh
-apt-get install docker
-```
-
-## Building and running the software
-
-### Without docker
-
-- The top level [Makefile](Makefile) takes care fore running an out-of-source build in the `build` folder.
+- We're running an out-of-source build in the `build` folder (= the created binaries and auxiliary files will be in a separate directory).
 ```sh
 mkdir -p build && cd build
 cmake ..
-# or if you have installed gtest and boost:
-cmake .. -DWITH_GTEST=ON -DWITH_BOOST=ON
+```
 
+- Let's run an example
+```sh
 make
 bin/hello/hello_world_c
 ```
 
-### With docker
+### Add own source code
 
-- The same [Makefile](Makefile) contains several commands to simplify the build and execution with docker.
+- It's recommended to utilize the [src/user](src/user) folder for own developments. To avoid potential conflicts with the repository, let's create a separate folder for you. Assuming `xy` are your initials:
 ```sh
-make dockerbuild  # only build image
-make docker       # build & run
+# cd .. # if you`re still within the build dir!
+mkdir -p src/user/xy
+cd src/user/xy
 ```
-- Running the image will execute [run.sh](src/run.sh) inside the image - The script just calls a couple of compiled programs.
-- The [Dockerfile](Dockerfile) also contains a section to automatically start a "documentation server" - this will be available at [localhost:8080/](http://localhost:8080/) then.
+- Let's create a new source code file - and a cmake file called `CMakeLists.txt`.
+```sh
+touch helloxy.c
+touch CMakeLists.txt
+```
+- Open these files in your editor of choice and add the following content:
+```C
+// helloxy.c
+#include<stdio.h>
 
-## Recommended addons
+int main(void) {
+	printf("Hello World from XY\n");
+	return 0;
+}
+```
+```cmake
+# CMakeLists.txt
+add_executable(helloxy helloxy.c)
+```
+- Now we can compile and execute this. Let's go to the `build` folder first:
+```sh
+cd ../../../build
+make
 
-### Boost
+bin/user/helloxy
+```
+
+## Interacting with the repository
+
+This repository will be frequently updated. The following is a "cheat sheet" of commands to ensure the local repository can get these updates - and some "first aid" commands to troubleshoot.
+This is just a brief overview of few basics - a more sophisticated intro into `git` can be found at [git-scm.com](https://git-scm.com/book/en/v2)
+
+### Cleaning the build folder
+
+- The benefit of an "out-of-source"-build is to be able to clean up the whole repository by just deleting contents in one single folder. The "soft" way of cleanup leaves all CMake files in place and just cleares the build target.
+```sh
+make clean
+make       # Re-compiles everything
+```
+
+- Sometimes, just deleting everything in the folder and "starting fresh" is worth a try. Just make sure you're in the right folder, before recusively deleting everything ...
+```sh
+cd build
+rm * -Rf   # DANGEROUS! Doublecheck before executing!!
+
+cmake ..   # Re-initialize and ....
+make       # ... build everything
+```
+
+### Getting updates
+
+- Usually, a `pull` will do. From the [git docs](https://git-scm.com/docs/git-pull): _Incorporates changes from a remote repository into the current branch. If the current branch is behind the remote, then by default it will fast-forward the current branch to match the remote._
+```sh
+git pull
+```
+
+### Reverting local changes
+
+- When reverting local changes in a particular `<file>`, often it's best to do:
+```sh
+git checkout -- <file>
+```
+
+- When the repository should be brought back to it's remote state, this command is the last resort. **Careful**: This will simply discard all local changes and _DELETE_ all untracked files, including them in your `/src/user` folder!
+```sh
+git reset --hard  # DANGEROUS! 
+```
+
+## Integrated Development Environment
+
+A graphical IDE is optional, but generally considered to be very useful supporting the productivity in the development process. Generally, any IDE will do the job. Visual Studio Code though is recommended due to being free, available for all common operating systems and quite lightweight. It supports the "common" (and also recommended setup) of utilizing Windows Subsystem for Linux very well. Installation and setup is documented following these links:
+
+- [Introductory Videos for C++](https://code.visualstudio.com/docs/cpp/introvideos-cpp )
+- [Using C++ on Linux in VS Code](https://code.visualstudio.com/docs/cpp/config-linux) - Configuration for "native" Linux
+- [Using C++ and WSL in VS Code](https://code.visualstudio.com/docs/cpp/config-wsl) - Configuration for Windows Subsystem for Linux, highly recommended and preferred over installing compiler+CMake natively in Windows. This will show how to utilize the [WSL Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) to work with source code placed inside WSL.
+
+### Running CMake in Visual Studio Code
+
+- Open the `fomss2024aud` folder by `File -> Open Folder` from the menu.
+- _Note:_ If using WSL, open the folder from your WSL drive. It is available via Explorer within the Linux drive - or directly by typing in `\\wsl.localhost\Debian\home\<USER>` (use "Ubuntu" instead of Debian, depending on your installation and replace `<USER>` by your WSL Linux username).
+  <br />
+  <img src="docs/pics/readme_vscode_wsl_folder.png" width="100px" />
+- _Note:_ Once a WSL folder is opened, VS Code will install an extension into your WSL instance. In the bottom left, a blue icon will indicate 
+  <br />
+  <img src="docs/pics/readme_vscode_wsl.png" width="200px" />
+  <br />
+   Any extension needs to be installed within this "remote" environment on WSL.
+
+- Install extension [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools).
+- You can run CMake directly from VS Code. A comprehensive tutorial can be found [here](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-presets.md#configure-and-build) - in short:
+    - Press `Ctrl+Shift+P`, type "CMake: Configure" and choose the entry.
+    <br />
+    <img src="docs/pics/readme_vscode_cmake01.png" width="200px" />
+    
+    - Now CMake should have generated the build files in the `build/` folder, as if you have called it from the commandline. We then run a build (equal to `cmake .. --build` or `make` on the commandline from the `build` folder):
+    <br />
+    <img src="docs/pics/readme_vscode_cmake02.png" width="200px" />
+
+### Running Programs in VS Code
+
+- It is recommended, to create a CMake Build Target first. See section [add own source code](#add-own-source-code). In other words: There must be a `add_executable(...)` in one `CMakeList.txt` for every of your application containing a `main()` function.
+- With installed [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) extension, every CMake Build Target is available within the CMake menu (see yellow highlight). The current target can be changed by clicking the pencil icon (green highlight). The code can be executed via the arrow button (blue highlight) - either in debug or just launch mode without debugging.
+    <br />
+    <img src="docs/pics/readme_vscode_cmake.png" width="200px" />
+
+- Details can be found in the docs: [CMake: Debug and launch](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/debug-launch.md)
+
+## Optional parts
+
+These parts go beyond an initial minimal setup to be able to compile and execute the given examples. Within the lecture, additional libraries are utilized which are not necessary from the very beginning. Their installation is described below.
+
+Today, Docker is common to have an "all in one" build environment, especially to ensure compatibility and perform integration checks based on defined environments. The scripts of this repository can be executed in a docker environment. Setting up Docker is therefore as relevant as it is instructive.
+
+Beyond the lecture, the scripts contained in this repository can be used to experiment with other programming languages and (build) environments. Optional, but a good start for a playground.
+
+### Recommended addons
+
+#### Boost
 
 - Boost is a library collection offering many additions to the C++ standard library, including structures and algorithms.
 - Install boost libraries (... all)
@@ -121,7 +231,7 @@ apt-get install libboost-all-dev
 cmake .. -DWITH_BOOST=ON
 ```
 
-### GoogleTest
+#### GoogleTest
 
 GoogleTest is a well-known testing and mocking framework for C++. It's for unit testing "and beyond", while we will docus on utilizing it ensuring our algorithms do what they're supposed to.
 ```sh
@@ -132,11 +242,55 @@ apt-get install googletest libgtest-dev
 cmake .. -DWITH_GTEST=ON
 ```
 
-## Optional parts
+#### Valgrind
 
-The scripts contained in this repository can be used to experiment with other programming languages and environments. Optional, but a good start for a playground.
+For checking proper memory management, `valgrind` is the tool of choise.
 
-### Assembler & Qemu
+- Installing `valgrind`
+```sh
+apt-get install valgrind
+```
+- Running `valgrind` by simply inserting it "in front" of command to be executed.
+```sh
+valgrind bin/hello/hello_world_c
+```
+
+### Docker-based Build Environment
+
+#### Installing Docker
+
+Based on the given operating system environment, there are different ways how to install Docker:
+
+- Docker in "native" Linux
+
+    - The "host" system only needs to have docker installed.
+    - [Install Docker Desktop on Linux](https://docs.docker.com/desktop/install/linux-install/)
+
+- Docker - Windows with WSL (+Ubuntu/Debian)
+
+    - With WSL, it's a bit trickyer - we need to install Docker in Windows, first. There is documentation on how to do that:
+        - [Docker Desktop WSL 2 backend on Windows](https://docs.docker.com/desktop/wsl/)
+        - [Get started with Docker remote containers on WSL 2](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers)
+    - In the WSL Linux guest system, docker also needs to be "installed":
+```sh
+apt-get install docker
+```
+#### Building and Executing
+
+- The [Makefile](Makefile) contains several commands to simplify the build and execution with docker.
+```sh
+make dockerbuild  # only build image
+make docker       # build & run
+```
+- Running the image will execute [run.sh](src/run.sh) inside the image - The script just calls a couple of compiled programs.
+- The [Dockerfile](Dockerfile) also contains a section to automatically start a "documentation server" - this will be available at [localhost:8080/](http://localhost:8080/) then.
+
+
+### Playgrounds
+
+This section describes how to setup some playgrounds for additional programming languages and build environments.
+
+#### Assembler & Qemu
 
 - Install assembler and qemu emulator. Add architecture if needed.
 ```sh
@@ -157,7 +311,7 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=../CMake-Toolchain-linux-arm.txt
 qemu-arm bin/hello_world_asm_arm
 ```
 
-### Rust
+#### Rust
 
 - Install rust compiler and package manager.
 ```sh
@@ -176,7 +330,7 @@ cargo run --bin hellorust
 - Run tests
 
 
-### Terraform
+#### Terraform
 
 Not having a suitable build environment at hand? No problem! With today's hyperscalers, we're only a couple of commands away from building one. This is utilizing AWS here - could be any hyperscaler, though.
 
@@ -225,7 +379,7 @@ make docker
 - G. Pomberger and H. Dobler, Algorithmen und Datenstrukturen: eine systematische Einführung in die Programmierung. Pearson, 2008.
 - D. Harel and Y. A. Feldman, Algorithmics: The spirit of computing. Pearson Education, 2004.
 - B. N. Miller and D. L. Ranum, Problem solving with algorithms and data structures using Python. Franklin, Beedle & Associates Inc., 2011. 
-- A. Solymosi and U. Grude, Grundkurs Algorithmen und Datenstrukturen in JAVA, vol. 4. Springer, 2017.
+- A. Solymosi and U. Grude, Grundkurs Algorithmen und Datenstrukturen in JAVA, Springer, 2017.
 - P. Widmayer and T. Ottmann, Algorithmen und Datenstrukturen. Springer, 2017.
 
 - B. W. Kernighan and D. M. Ritchie, The C programming language. Prentice Hall, 1988.

@@ -6,11 +6,11 @@ image_name = fomaud
 all: | build
 
 clean:
-	@rm -rf build
+	@rm -Rf build/*
 
 build:
 	@mkdir -p build;
-	@cd build && cmake ../src/ && make -s -j1;
+	@cd build && cmake .. && make -s -j1;
 
 dockerbuild:
 # --no-cache
