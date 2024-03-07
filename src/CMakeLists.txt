@@ -1,22 +1,55 @@
 # GoogleTest requires at least C++14
-set(CMAKE_CXX_STANDARD 14) # 17
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_C_STANDARD 11)
+## https://cmake.org/cmake/help/latest/prop_tgt/CXX_STANDARD.html
+set(CMAKE_CXX_STANDARD 14) #98 #11 #14 #17 #20 #23 #26
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+## https://cmake.org/cmake/help/latest/prop_tgt/C_STANDARD.html
+set(CMAKE_C_STANDARD 99) #90 #99 #11 #17 #23
+set(CMAKE_C_STANDARD_REQUIRED TRUE)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(CMAKE_C_FLAGS "-g -Wall -Wextra -pedantic -Werror -Wstrict-prototypes")
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -pedantic -Werror")
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    # using Clang
+    ## https://clang.llvm.org/docs/DiagnosticsReference.html
+    ## -Wshadow-all - for warnings on shadowing variables
+    set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Werror")
+
+    if (CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
+        # using clang with clang-cl front end
+    elseif (CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "GNU")
+        # using clang with regular front end
+    endif()
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    # using GCC
+    ## Yes, "-pedantic" without 'W', see https://gcc.gnu.org/onlinedocs/gcc-4.7.4/gcc/Warning-Options.html#index-pedantic-252
+    set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -pedantic -Werror")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+    # using Intel C++
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    # using Visual Studio C++
+endif()
+
+if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_C_FLAGS "-g -Wall -Wextra -Werror")
+elseif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_C_FLAGS "-g -Wall -Wextra -pedantic -Werror -Wstrict-prototypes")
+elseif (CMAKE_C_COMPILER_ID STREQUAL "Intel")
+elseif (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
+endif()
 
 MESSAGE(STATUS "CMAKE_BUILD_TYPE       = ${CMAKE_BUILD_TYPE}")
+MESSAGE(STATUS "CMAKE_C_COMPILER_ID    = ${CMAKE_C_COMPILER_ID}")
+MESSAGE(STATUS "CMAKE_CXX_COMPILER_ID  = ${CMAKE_CXX_COMPILER_ID}")
 MESSAGE(STATUS "CMAKE_INSTALL_PREFIX   = ${CMAKE_INSTALL_PREFIX}")
 MESSAGE(STATUS "BUILD_SHARED_LIBS      = ${BUILD_SHARED_LIBS}")
 MESSAGE(STATUS "CMAKE_C_FLAGS          = ${CMAKE_C_FLAGS}")
 MESSAGE(STATUS "CMAKE_CXX_FLAGS        = ${CMAKE_CXX_FLAGS}")
 MESSAGE(STATUS "CMAKE_EXE_LINKER_FLAGS = ${CMAKE_EXE_LINKER_FLAGS}")
 MESSAGE(STATUS "CMAKE_SYSTEM_NAME      = ${CMAKE_SYSTEM_NAME}")
+MESSAGE(STATUS "CMAKE_C_STANDARD       = ${CMAKE_C_STANDARD}")
+MESSAGE(STATUS "CMAKE_CXX_STANDARD     = ${CMAKE_CXX_STANDARD}")
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     add_definitions(-DLINUX)
