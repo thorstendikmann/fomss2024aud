@@ -2,16 +2,22 @@
 
 void simplePrints(void)
 {
-	printf("String: %s\n", "a string");
+	printf("\"String\": %s\n", "a string");
 	printf("Int: %i\n", 42);
 	printf("Float: %f\n", 33.33);
 }
 
+#include <string.h>
 void simpleVariables(void)
 {
-	char *telnummer;
-	telnummer = "02513315";
-	telnummer = "0251 91 55 846";
+	int i = 10;
+	float f = 3.142;
+	char c = 'H';
+	printf("i:%d f:%f c:%c\n", i,f,c);
+
+	char telnummer[15];
+	strcpy(telnummer, "02513315");
+	strcpy(telnummer, "0251 91 55 846");
 	printf("Telefon: %s\n", telnummer);
 }
 

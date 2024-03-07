@@ -21,11 +21,13 @@ JAVADOC_AUTOBRIEF      = YES
 OPTIMIZE_OUTPUT_JAVA   = YES
 
 TOC_INCLUDE_HEADINGS   = 1
+MARKDOWN_SUPPORT       = YES
 
 EXCLUDE_PATTERNS       = */.svn/* \
                          */docs/* \
                          */published/* \
                          */bin/* \
                          */build/* \
+                         */build* \
                          */obj/* \
                          */target/*

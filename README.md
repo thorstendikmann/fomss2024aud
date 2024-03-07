@@ -14,6 +14,8 @@ cd ~ && npm install doctoc
 ~/node_modules/doctoc/doctoc.js --github README.md
  -->
 
+<!-- \cond DO_NOT_DOCUMENT
+-->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -47,6 +49,8 @@ cd ~ && npm install doctoc
   - [Toolchain](#toolchain)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- \endcond
+-->
 
 ## Quick Start: Local Build on Commandline
 
@@ -202,7 +206,11 @@ A graphical IDE is optional, but generally considered to be very useful supporti
 
 ### Running Programs in VS Code
 
+<!-- \cond DO_NOT_DOCUMENT
+-->
 - It is recommended, to create a CMake Build Target first. See section [add own source code](#add-own-source-code). In other words: There must be a `add_executable(...)` in one `CMakeList.txt` for every of your application containing a `main()` function.
+<!-- \endcond
+-->
 - With installed [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) extension, every CMake Build Target is available within the CMake menu (see yellow highlight). The current target can be changed by clicking the pencil icon (green highlight). The code can be executed via the arrow button (blue highlight) - either in debug or just launch mode without debugging.
     <br />
     <img src="docs/pics/readme_vscode_cmake.png" width="200px" />
