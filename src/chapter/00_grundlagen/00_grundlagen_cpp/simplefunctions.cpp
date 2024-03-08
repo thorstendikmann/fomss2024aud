@@ -28,6 +28,7 @@ void somestrings()
 void showBool()
 {
     bool codingIsFun = true;
+    // cppcheck-suppress [knownConditionTrueFalse]
     if (codingIsFun)
     {
         std::cout << "You're so right!" << std::endl;
@@ -56,7 +57,7 @@ int count(const std::string &s, char c)
         {
             n++;
         }
-        i++;
+        ++i;
     }
     return n;
 }

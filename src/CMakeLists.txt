@@ -39,6 +39,13 @@ elseif (CMAKE_C_COMPILER_ID STREQUAL "Intel")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
 endif()
 
+# Manually select lld as linker
+if(USE_LLD)
+    # Replace in future: CMake 3.29 -> CMAKE_LINKER_TYPE
+    add_link_options("-fuse-ld=lld")
+endif(USE_LLD)
+
+
 MESSAGE(STATUS "CMAKE_BUILD_TYPE       = ${CMAKE_BUILD_TYPE}")
 MESSAGE(STATUS "CMAKE_C_COMPILER_ID    = ${CMAKE_C_COMPILER_ID}")
 MESSAGE(STATUS "CMAKE_CXX_COMPILER_ID  = ${CMAKE_CXX_COMPILER_ID}")

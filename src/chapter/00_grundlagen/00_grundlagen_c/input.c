@@ -34,9 +34,9 @@ void scanfInt(void)
  */
 void scanfString(void)
 {
-	char name[20];
+	char name[21]; // max 20 + '\0'
 	printf("Gebe Name ein (max 20 Zeichen!!): \n");
-	scanf("%s", name);
+	scanf("%20s", name);
 
 	printf("Eingabe: %s\n", name);
 }

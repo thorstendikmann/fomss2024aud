@@ -6,11 +6,12 @@ enable_language(C CXX)
 ##
 ## Project Options
 ##
-option(WITH_DOC "Build documentation" ON)
+option(WITH_DOC "Build documentation" OFF)
 option(WITH_RUST "Build rust hello world examples?" OFF)
 option(WITH_ASM "Build assembler hello world examples?" OFF)
 option(WITH_GTEST "Build Google Test examples and require GTest libs?" OFF)
 option(WITH_BOOST "Build Boost examples and require Boost libs?" OFF)
+option(USE_LLD "Use LLD instead of ld" OFF) # in future: CMake 3.29 -> CMAKE_LINKER_TYPE
 
 if(WITH_ASM)
     message("-- Adding Assembler language")

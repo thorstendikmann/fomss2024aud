@@ -80,6 +80,7 @@ int main(void)
 
 // See https://github.com/ctasims/The-C-Programming-Language--Kernighan-and-Ritchie/blob/master/ch04-functions-and-program-structure/strindex.c
 /* strindex: return index of t in s, -1 if none */
+// cppcheck-suppress [constParameter]
 int strindex(char s[], char t[])
 {
     int i, j, k;
@@ -133,7 +134,9 @@ void setVar(double varIndex, double value)
         return;
     }
 
+// cppcheck-suppress [arrayIndexOutOfBoundsCond]
     variables[index] = value;
+// cppcheck-suppress [arrayIndexOutOfBoundsCond]
     variableFlags[index] = 1;
 
     push(value); // to show result

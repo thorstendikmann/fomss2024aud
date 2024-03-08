@@ -179,7 +179,8 @@ void uebung_SpeicherverwaltungInC(void)
     int *anotherPtr;
     // ... I have a tendency to cast to (int *) - this would be more C++, though
     // See Stroustrup, appendix B on compatibility.
-    int *iPtr = malloc(5 * sizeof(int));
+    //int *iPtr = malloc(5 * sizeof(int));
+    int *iPtr = calloc(5, sizeof(int)); // prefer initialized memory.
     *iPtr++ = 10;
     *iPtr++ = 11;
     *iPtr++ = 12;

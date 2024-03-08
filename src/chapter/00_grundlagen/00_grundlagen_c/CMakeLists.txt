@@ -1,6 +1,7 @@
 
 add_executable(simplefunctions simplefunctions.c)
 install(TARGETS simplefunctions DESTINATION bin/c00)
+target_link_libraries(simplefunctions m) # math
 
 add_executable(arrays arrays.c)
 install(TARGETS arrays DESTINATION bin/c00)

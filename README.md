@@ -36,7 +36,9 @@ cd ~ && npm install doctoc
   - [Recommended addons](#recommended-addons)
     - [Boost](#boost)
     - [GoogleTest](#googletest)
+    - [Doxygen](#doxygen)
     - [Valgrind](#valgrind)
+    - [cppchecker](#cppchecker)
   - [Docker-based Build Environment](#docker-based-build-environment)
     - [Installing Docker](#installing-docker)
     - [Building and Executing](#building-and-executing)
@@ -44,6 +46,7 @@ cd ~ && npm install doctoc
     - [Assembler & Qemu](#assembler--qemu)
     - [Rust](#rust)
     - [Terraform](#terraform)
+    - [Alternative Compilers](#alternative-compilers)
 - [References](#references)
   - [Examples and some additional literature:](#examples-and-some-additional-literature)
   - [Toolchain](#toolchain)
@@ -250,6 +253,18 @@ apt-get install googletest libgtest-dev
 cmake .. -DWITH_GTEST=ON
 ```
 
+#### Doxygen
+
+Doxygen is a documentation generator. Especially in larger projects it's often helpful to have a central website-based code documentation. With additional tools (from `graphviz`) relationships and dependencies within the source code repository can be visualized.
+
+```sh
+apt-get install doxygen graphviz
+```
+- Ensure you run CMake with the `-DWITH_DOC=ON` option, e.g.
+```sh
+cmake .. -DWITH_DOC=ON
+```
+
 #### Valgrind
 
 For checking proper memory management, `valgrind` is the tool of choise.
@@ -261,6 +276,20 @@ apt-get install valgrind
 - Running `valgrind` by simply inserting it "in front" of command to be executed.
 ```sh
 valgrind bin/hello/hello_world_c
+```
+
+#### cppchecker
+
+Additional static code analysis tool to detect potential issues with the source code.
+
+```sh
+apt-get install cppcheck
+```
+- In the main folder run
+```sh
+cppcheck src --force
+# A good set of warnings for this lecture:
+cppcheck src --force  --enable=all --suppress=unusedFunction --suppress=redundantAssignment --suppress=variableScope --suppress=missingInclude --enable=style --inline-suppr --template=gcc
 ```
 
 ### Docker-based Build Environment
@@ -374,6 +403,18 @@ cd ~/workspace/fomss2024aud
 make docker
 ```
 
+#### Alternative Compilers
+
+- Instead of GCC, alternative compilers can be utilized (though not recommended). Let's install `clang` and the `lld` linker
+```sh
+apt-get install clang lld
+```
+
+- Before running CMake the first time, we can enable `clang` via environment variables. `lld` as linker has to be selected manually via `-D` option.
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+cmake .. -D USE_LLD
+
 ## References
 
 ### Examples and some additional literature:
@@ -419,5 +460,6 @@ make docker
 - [Valgrind](https://valgrind.org/)
 - [Google Test](https://google.github.io/googletest/)
 - [Boost C++ Libraries](https://www.boost.org/)
+- [Cppcheck](https://cppcheck.sourceforge.io/)
 - [doctoc](https://github.com/thlorenz/doctoc) - for updating the "table of contents" of this file.
 
