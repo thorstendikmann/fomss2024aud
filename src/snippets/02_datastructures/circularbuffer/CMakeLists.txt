@@ -1,0 +1,1 @@
+add_executable(circularbuffer_snp circularbuffer.c circularbuffer_test.c)

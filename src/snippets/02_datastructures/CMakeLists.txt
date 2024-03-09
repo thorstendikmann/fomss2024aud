@@ -1,1 +1,1 @@
-add_executable(array_snp array.c array_test.c)
+td_add_all_subdirectories()

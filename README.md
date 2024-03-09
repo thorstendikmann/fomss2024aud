@@ -411,9 +411,11 @@ apt-get install clang lld
 ```
 
 - Before running CMake the first time, we can enable `clang` via environment variables. `lld` as linker has to be selected manually via `-D` option.
+```sh
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 cmake .. -D USE_LLD=ON
+```
 
 ## References
 
