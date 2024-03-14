@@ -24,7 +24,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # using GCC
     ## Yes, "-pedantic" without 'W', see https://gcc.gnu.org/onlinedocs/gcc-4.7.4/gcc/Warning-Options.html#index-pedantic-252
-    set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -pedantic -Werror")
+    set(CMAKE_CXX_FLAGS "-g3 -ggdb -O0 -Wall -Wextra -pedantic -Werror")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
     # using Intel C++
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -34,7 +34,7 @@ endif()
 if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
     set(CMAKE_C_FLAGS "-g -Wall -Wextra -Werror")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
-    set(CMAKE_C_FLAGS "-g -Wall -Wextra -pedantic -Werror -Wstrict-prototypes")
+    set(CMAKE_C_FLAGS "-g3 -ggdb -O0 -Wall -Wextra -pedantic -Werror -Wstrict-prototypes")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "Intel")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
 endif()
@@ -70,6 +70,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 endif()
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   add_definitions(-DWINDOWS)
+  set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
 ## Macro for adding all subdirectories

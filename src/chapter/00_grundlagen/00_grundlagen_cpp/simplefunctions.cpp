@@ -17,7 +17,16 @@ void somestrings()
     // actually, we could call this function
     operator<<(std::cout, "Another hello world\n");
 
+    // Iterators
+    for (std::string::const_iterator iter = greeting.begin();
+         iter != greeting.end();
+         iter++)
+    {
+        std::cout << *iter << std::endl;
+    }
+
     // "to lowercase" - via std::transform
+    // Second begin() is pointing to destination ... which usually is identical to source.
     std::transform(greeting.begin(), greeting.end(), greeting.begin(), tolower);
     std::cout << greeting << std::endl;
 }
