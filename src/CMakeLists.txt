@@ -101,8 +101,17 @@ if(WITH_BOOST)
     set(Boost_USE_STATIC_LIBS OFF)
     set(Boost_USE_MULTITHREADED OFF)
     set(Boost_USE_STATIC_RUNTIME OFF)
-    # Replace "ALL" - Add only needed components
-    find_package(Boost 1.74 REQUIRED COMPONENTS ALL)
+    find_package(Boost 1.74 REQUIRED COMPONENTS log)
+    
+    message("-- Found Boost libraries: ${Boost_LIBRARIES}")
+    
+    link_directories( $ENV{LD_LIBRARY_PATH}
+        ${Boost_LIBRARY_DIRS}
+    )
+    include_directories(
+        $ENV{LD_INCLUDE_PATH}
+        ${Boost_INCLUDE_DIR}
+    )
 endif(WITH_BOOST)
 
 ## Google Test

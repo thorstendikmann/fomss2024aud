@@ -41,7 +41,15 @@ namespace fom
             const std::string toString();
 
         private:
+// Clang does not detect we will be utilizing l in implementation.
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-private-field"
+#endif
             LinkedList *l;
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
         };
     }
 }
