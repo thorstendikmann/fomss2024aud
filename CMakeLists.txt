@@ -11,6 +11,7 @@ option(WITH_RUST "Build rust hello world examples?" OFF)
 option(WITH_ASM "Build assembler hello world examples?" OFF)
 option(WITH_GTEST "Build Google Test examples and require GTest libs?" OFF)
 option(WITH_BOOST "Build Boost examples and require Boost libs?" OFF)
+option(WITH_VIS "Build GUI examples (requires Qt and other libs)?" OFF) # WITH_VISUALIZATION ... just shorter
 option(USE_LLD "Use LLD instead of ld" OFF) # in future: CMake 3.29 -> CMAKE_LINKER_TYPE
 
 if(WITH_ASM)

@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 
+/** Struct to store address data. */
 struct address
 {
+    /** Address - Name */
     char name[100];
+    /** Address - Street */
     char street[100];
+    /** Address - Street No. */
     short number;
+    /** Address - Postal No. */
     int postal;
+    /** Address - City */
     char city[50];
 };
 

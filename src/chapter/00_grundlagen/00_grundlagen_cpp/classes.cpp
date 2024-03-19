@@ -7,7 +7,9 @@
 class MyCppClass
 {
 public:
+    /** Demo for public member num. */
     int num;
+    /** Demo for public member str. */
     std::string str;
 
     /**
