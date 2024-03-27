@@ -206,7 +206,7 @@ node *doublelinkedlist_find(DoubleLinkedList *l, char value);
  * @param item given item whose predecessor to be found in list.
  * @return previous element in list if found, 0 otherwise.
  */
-node *doublelinkedlist_find_previous(DoubleLinkedList *l, node *item);
+node *doublelinkedlist_find_previous(DoubleLinkedList *l, const node *item);
 
 /**
  * Returns the DoubleLinkedList node element for the given object if stored in list.

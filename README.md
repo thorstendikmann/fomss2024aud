@@ -24,14 +24,15 @@ cd ~ && npm install doctoc
   - [Clone Repository](#clone-repository)
   - [Local Build Requirements](#local-build-requirements)
   - [Local Build Execution](#local-build-execution)
-  - [Add own source code](#add-own-source-code)
+  - [Add own source code (from scratch)](#add-own-source-code-from-scratch)
+  - [Work on exercises (from "snippets")](#work-on-exercises-from-snippets)
+- [Integrated Development Environment](#integrated-development-environment)
+  - [Running CMake in Visual Studio Code](#running-cmake-in-visual-studio-code)
+  - [Running Programs in VS Code](#running-programs-in-vs-code)
 - [Interacting with the repository](#interacting-with-the-repository)
   - [Cleaning the build folder](#cleaning-the-build-folder)
   - [Getting updates](#getting-updates)
   - [Reverting local changes](#reverting-local-changes)
-- [Integrated Development Environment](#integrated-development-environment)
-  - [Running CMake in Visual Studio Code](#running-cmake-in-visual-studio-code)
-  - [Running Programs in VS Code](#running-programs-in-vs-code)
 - [Optional parts](#optional-parts)
   - [Recommended addons](#recommended-addons)
     - [Boost](#boost)
@@ -39,6 +40,7 @@ cd ~ && npm install doctoc
     - [Doxygen](#doxygen)
     - [Valgrind](#valgrind)
     - [cppchecker](#cppchecker)
+    - [Visualization](#visualization)
   - [Docker-based Build Environment](#docker-based-build-environment)
     - [Installing Docker](#installing-docker)
     - [Building and Executing](#building-and-executing)
@@ -101,7 +103,7 @@ make
 bin/hello/hello_world_c
 ```
 
-### Add own source code
+### Add own source code (from scratch)
 
 - It's recommended to utilize the [src/user](src/user) folder for own developments. To avoid potential conflicts with the repository, let's create a separate folder for you. Assuming `xy` are your initials:
 ```sh
@@ -131,10 +133,67 @@ add_executable(helloxy helloxy.c)
 - Now we can compile and execute this. Let's go to the `build` folder first:
 ```sh
 cd ../../../build
+cmake
 make
 
 bin/user/helloxy
 ```
+
+### Work on exercises (from "snippets")
+
+- Best is to copy the relevant folder from [src/snippets](src/snippets) to your [src/user/xy](src/user) folder just created above, e.g. for `factorial` example in []
+```
+cp -r  src/snippets/01_einfuehrung/factorial src/user/xy/
+```
+- Now modify the `CMakeLists.txt` in the copied folder to adjust the name of your build target:
+```CMake
+add_executable(factorial_xy factorial.c)  ## replace the _snp by _xy (or whatever)
+```
+
+## Integrated Development Environment
+
+A graphical IDE is optional, but generally considered to be very useful supporting the productivity in the development process. Generally, any IDE will do the job. Visual Studio Code though is recommended due to being free, available for all common operating systems and quite lightweight. It supports the "common" (and also recommended setup) of utilizing Windows Subsystem for Linux very well. Installation and setup is documented following these links:
+
+- [Introductory Videos for C++](https://code.visualstudio.com/docs/cpp/introvideos-cpp )
+- [Using C++ on Linux in VS Code](https://code.visualstudio.com/docs/cpp/config-linux) - Configuration for "native" Linux
+- [Using C++ and WSL in VS Code](https://code.visualstudio.com/docs/cpp/config-wsl) - Configuration for Windows Subsystem for Linux, highly recommended and preferred over installing compiler+CMake natively in Windows. This will show how to utilize the [WSL Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) to work with source code placed inside WSL.
+
+### Running CMake in Visual Studio Code
+
+- Open the `fomss2024aud` folder by `File -> Open Folder` from the menu.
+- _Note:_ If using WSL, open the folder from your WSL drive. It is available via Explorer within the Linux drive - or directly by typing in `\\wsl.localhost\Debian\home\<USER>` (use "Ubuntu" instead of Debian, depending on your installation and replace `<USER>` by your WSL Linux username).
+  <br />
+  <img src="docs/pics/readme_vscode_wsl_folder.png" width="100px" />
+- _Note:_ Once a WSL folder is opened, VS Code will install an extension into your WSL instance. In the bottom left, a blue icon will indicate 
+  <br />
+  <img src="docs/pics/readme_vscode_wsl.png" width="200px" />
+  <br />
+   Any extension needs to be installed within this "remote" environment on WSL.
+
+- Install extension [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools).
+- You can run CMake directly from VS Code. A comprehensive tutorial can be found [here](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-presets.md#configure-and-build) - in short:
+    - Press `Ctrl+Shift+P`, type "CMake: Configure" and choose the entry.
+    <br />
+    <img src="docs/pics/readme_vscode_cmake01.png" width="200px" />
+    
+    - Now CMake should have generated the build files in the `build/` folder, as if you have called it from the commandline. We then run a build (equal to `cmake .. --build` or `make` on the commandline from the `build` folder):
+    <br />
+    <img src="docs/pics/readme_vscode_cmake02.png" width="200px" />
+
+- Note: When you create new build targets in a `CMakeLists.txt`: To select your new target in Visual Studio Code, you may have to repeat this process!
+
+### Running Programs in VS Code
+
+<!-- \cond DO_NOT_DOCUMENT
+-->
+- It is recommended, to create a CMake Build Target first. See section [add own source code](#add-own-source-code). In other words: There must be a `add_executable(...)` in one `CMakeList.txt` for every of your application containing a `main()` function.
+<!-- \endcond
+-->
+- With installed [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) extension, every CMake Build Target is available within the CMake menu (see yellow highlight). The current target can be changed by clicking the pencil icon (green highlight). The code can be executed via the arrow button (blue highlight) - either in debug or just launch mode without debugging.
+    <br />
+    <img src="docs/pics/readme_vscode_cmake.png" width="200px" />
+
+- Details can be found in the docs: [CMake: Debug and launch](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/debug-launch.md)
 
 ## Interacting with the repository
 
@@ -176,49 +235,6 @@ git checkout -- <file>
 ```sh
 git reset --hard  # DANGEROUS! 
 ```
-
-## Integrated Development Environment
-
-A graphical IDE is optional, but generally considered to be very useful supporting the productivity in the development process. Generally, any IDE will do the job. Visual Studio Code though is recommended due to being free, available for all common operating systems and quite lightweight. It supports the "common" (and also recommended setup) of utilizing Windows Subsystem for Linux very well. Installation and setup is documented following these links:
-
-- [Introductory Videos for C++](https://code.visualstudio.com/docs/cpp/introvideos-cpp )
-- [Using C++ on Linux in VS Code](https://code.visualstudio.com/docs/cpp/config-linux) - Configuration for "native" Linux
-- [Using C++ and WSL in VS Code](https://code.visualstudio.com/docs/cpp/config-wsl) - Configuration for Windows Subsystem for Linux, highly recommended and preferred over installing compiler+CMake natively in Windows. This will show how to utilize the [WSL Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) to work with source code placed inside WSL.
-
-### Running CMake in Visual Studio Code
-
-- Open the `fomss2024aud` folder by `File -> Open Folder` from the menu.
-- _Note:_ If using WSL, open the folder from your WSL drive. It is available via Explorer within the Linux drive - or directly by typing in `\\wsl.localhost\Debian\home\<USER>` (use "Ubuntu" instead of Debian, depending on your installation and replace `<USER>` by your WSL Linux username).
-  <br />
-  <img src="docs/pics/readme_vscode_wsl_folder.png" width="100px" />
-- _Note:_ Once a WSL folder is opened, VS Code will install an extension into your WSL instance. In the bottom left, a blue icon will indicate 
-  <br />
-  <img src="docs/pics/readme_vscode_wsl.png" width="200px" />
-  <br />
-   Any extension needs to be installed within this "remote" environment on WSL.
-
-- Install extension [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools).
-- You can run CMake directly from VS Code. A comprehensive tutorial can be found [here](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-presets.md#configure-and-build) - in short:
-    - Press `Ctrl+Shift+P`, type "CMake: Configure" and choose the entry.
-    <br />
-    <img src="docs/pics/readme_vscode_cmake01.png" width="200px" />
-    
-    - Now CMake should have generated the build files in the `build/` folder, as if you have called it from the commandline. We then run a build (equal to `cmake .. --build` or `make` on the commandline from the `build` folder):
-    <br />
-    <img src="docs/pics/readme_vscode_cmake02.png" width="200px" />
-
-### Running Programs in VS Code
-
-<!-- \cond DO_NOT_DOCUMENT
--->
-- It is recommended, to create a CMake Build Target first. See section [add own source code](#add-own-source-code). In other words: There must be a `add_executable(...)` in one `CMakeList.txt` for every of your application containing a `main()` function.
-<!-- \endcond
--->
-- With installed [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) extension, every CMake Build Target is available within the CMake menu (see yellow highlight). The current target can be changed by clicking the pencil icon (green highlight). The code can be executed via the arrow button (blue highlight) - either in debug or just launch mode without debugging.
-    <br />
-    <img src="docs/pics/readme_vscode_cmake.png" width="200px" />
-
-- Details can be found in the docs: [CMake: Debug and launch](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/debug-launch.md)
 
 ## Optional parts
 
@@ -292,6 +308,18 @@ cppcheck src --force
 cppcheck src --force  --enable=all --suppress=unusedFunction --suppress=redundantAssignment --suppress=variableScope --suppress=missingInclude --enable=style --inline-suppr --template=gcc
 ```
 
+#### Visualization
+
+- For compiling and running the GUI examples, the following is needed:
+```sh
+apt-get install graphviz-dev
+apt-get install qt6-base-dev
+```
+- Ensure you run CMake with the `-DWITH_VIS=ON` option, e.g.
+```sh
+cmake .. -DWITH_VIS=ON
+```
+
 ### Docker-based Build Environment
 
 #### Installing Docker
@@ -312,6 +340,7 @@ Based on the given operating system environment, there are different ways how to
 ```sh
 apt-get install docker
 ```
+
 #### Building and Executing
 
 - The [Makefile](Makefile) contains several commands to simplify the build and execution with docker.
@@ -414,7 +443,7 @@ apt-get install clang lld
 ```sh
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
-cmake .. -D USE_LLD=ON
+cmake .. -DUSE_LLD=ON
 ```
 
 ## References
@@ -439,7 +468,8 @@ cmake .. -D USE_LLD=ON
 - T. Theis, Einstieg in C. Rheinwerk Verlag, 2023.
 - R. Krooß and J. Wolf, C von A bis Z - das umfassende Handbuch. Rheinwerk Computing, 2023.
 - D. Bär, Schrödinger programmiert C++. Rheinwerk Computing, 2024.
-- U. Kaiser and M. Guddat, C/C++ - Das umfassende Lehrbuch. Galileo Press, 2014. T. T. Will, Einführung in C++. Galileo Computing, 2023.
+- U. Kaiser and M. Guddat, C/C++ - Das umfassende Lehrbuch. Galileo Press, 2014. 
+- T. T. Will, Einführung in C++. Galileo Computing, 2023.
 
 - J. Ernesti and P. Kaiser, Python 3. Rheinwerk, 2023.
 - M. Inden, Einfach Python. dpunkt Verlag, 2022.

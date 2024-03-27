@@ -232,7 +232,7 @@ node *doublelinkedlist_find(DoubleLinkedList *l, char value)
     return 0;
 }
 
-node *doublelinkedlist_find_previous(DoubleLinkedList *l, node *item)
+node *doublelinkedlist_find_previous(DoubleLinkedList *l, const node *item)
 {
     node *previous = l->head;
     while (previous != 0 && previous != l->tail)
