@@ -10,6 +10,9 @@
 
 void circular_buffer_print(const CircularBuffer *c)
 {
+    if (!c)
+        return;
+
     // print all elements "left to right"
     for (size_t i = 0; i < c->capacity; i++)
     {
@@ -52,7 +55,7 @@ char circular_buffer_pop_back(CircularBuffer *c)
     return '-';
 }
 
-char* circular_buffer_at(const CircularBuffer *c, size_t idx)
+char *circular_buffer_at(const CircularBuffer *c, size_t idx)
 {
     // TODO
     return 0;

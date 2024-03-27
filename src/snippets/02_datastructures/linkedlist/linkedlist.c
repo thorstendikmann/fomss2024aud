@@ -40,7 +40,7 @@ void linkedlist_destroy(LinkedList *l)
     linkedlist_print(l);
 
     node *n = l->head->next;
-    node *destroy = n;
+    node *destroy;
     // Quite brutal deletion of all nodes. Better properly remove.
     while (n != l->tail)
     {

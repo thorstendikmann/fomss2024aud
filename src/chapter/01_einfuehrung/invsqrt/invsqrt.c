@@ -178,6 +178,7 @@ void show_ieee754(float f)
 {
     union
     {
+        // cppcheck-suppress [unusedStructMember]
         float f;
         uint32_t u;
     } fu = {.f = f};
@@ -185,7 +186,7 @@ void show_ieee754(float f)
 
     printf("  ");
     while (i--)
-        printf("%d ", (fu.u >> i) & 0x1);
+        printf("%u ", (fu.u >> i) & 0x1);
 
     putchar('\n');
     printf(" |- - - - - - - - - - - - - - - - - - - - - - "
@@ -211,6 +212,7 @@ typedef union
         /** Exponent part of the float. */
         unsigned int exponent : 8;
         /** Sign bit of the float. */
+        // cppcheck-suppress [unusedStructMember]
         unsigned int sign : 1;
     }
     /** ... what the float internally bitwise consists of. */ 
@@ -236,8 +238,8 @@ void funWithIEEE754(void)
         float_cast fc = {.f = 2.0};
         printf("Float representation of %5.2f\n", fc.f);
         show_ieee754(fc.f);
-        printf(" %5.2f -> Chr: %3d | Man:   %3d\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
-        printf("          Exp: %3d | Man: 1,%3d\n", fc.parts.exponent - 127, fc.parts.mantisa);
+        printf(" %5.2f -> Chr: %3u | Man:   %3u\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
+        printf("          Exp: %3u | Man: 1,%3u\n", fc.parts.exponent - 127, fc.parts.mantisa);
     }
 
     {
@@ -245,8 +247,8 @@ void funWithIEEE754(void)
         float_cast fc = {.f = 4.0};
         printf("Float representation of %5.2f\n", fc.f);
         show_ieee754(fc.f);
-        printf(" %5.2f -> Chr: %3d | Man:   %3d\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
-        printf("          Exp: %3d | Man: 1,%3d\n", fc.parts.exponent - 127, fc.parts.mantisa);
+        printf(" %5.2f -> Chr: %3u | Man:   %3u\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
+        printf("          Exp: %3u | Man: 1,%3u\n", fc.parts.exponent - 127, fc.parts.mantisa);
     }
 
     {
@@ -254,8 +256,8 @@ void funWithIEEE754(void)
         float_cast fc = {.f = 8.0};
         printf("Float representation of %5.2f\n", fc.f);
         show_ieee754(fc.f);
-        printf(" %5.2f -> Chr: %3d | Man:   %3d\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
-        printf("          Exp: %3d | Man: 1.%d\n", fc.parts.exponent - 127, fc.parts.mantisa);
+        printf(" %5.2f -> Chr: %3u | Man:   %3u\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
+        printf("          Exp: %3u | Man: 1.%u\n", fc.parts.exponent - 127, fc.parts.mantisa);
     }
 
     {
@@ -263,8 +265,8 @@ void funWithIEEE754(void)
         float_cast fc = {.f = 16.0};
         printf("Float representation of %5.2f\n", fc.f);
         show_ieee754(fc.f);
-        printf(" %5.2f -> Chr: %3d | Man:   %3d\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
-        printf("          Exp: %3d | Man: 1.%d\n", fc.parts.exponent - 127, fc.parts.mantisa);
+        printf(" %5.2f -> Chr: %3u | Man:   %3u\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
+        printf("          Exp: %3u | Man: 1.%u\n", fc.parts.exponent - 127, fc.parts.mantisa);
         printf("\n");
 
         printf("Reduce Exp by 1:\n");
@@ -272,16 +274,16 @@ void funWithIEEE754(void)
         fc.parts.exponent = fc.parts.exponent - 1;
         printf("Float representation of %5.2f\n", fc.f);
         show_ieee754(fc.f);
-        printf(" %5.2f -> Chr: %3d | Man:   %3d\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
-        printf("          Exp: %3d | Man: 1.%d\n", fc.parts.exponent - 127, fc.parts.mantisa);
+        printf(" %5.2f -> Chr: %3u | Man:   %3u\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
+        printf("          Exp: %3u | Man: 1.%u\n", fc.parts.exponent - 127, fc.parts.mantisa);
 
         printf("Inc mantisa by 1:\n");
         // Reducing Exp by 1 = Number from 16 (2^4) -> 8 (2^3)
         fc.parts.mantisa = fc.parts.mantisa + (1 << 22);
         printf("Float representation of %5.2f\n", fc.f);
         show_ieee754(fc.f);
-        printf(" %5.2f -> Chr: %3d | Man:   %3d\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
-        printf("          Exp: %3d | Man: 1.%d\n", fc.parts.exponent - 127, fc.parts.mantisa);
+        printf(" %5.2f -> Chr: %3u | Man:   %3u\n", fc.f, fc.parts.exponent, fc.parts.mantisa);
+        printf("          Exp: %3u | Man: 1.%u\n", fc.parts.exponent - 127, fc.parts.mantisa);
 
         // Example how to "shift the comma" by the exponent
         int result = 1; // IEEE 754 ignors the 1, so let's add it.

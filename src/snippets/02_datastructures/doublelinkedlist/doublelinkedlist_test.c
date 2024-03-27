@@ -56,9 +56,7 @@ int main(void)
     doublelinkedlist_insert_after(&l, n, '2');
     n = doublelinkedlist_at(&l, 5);
     doublelinkedlist_insert_after(&l, n, '3');
-    n = doublelinkedlist_at(&l, 7);
     doublelinkedlist_insert_after_object(&l, 'E', '4');
-    n = doublelinkedlist_at(&l, 9);
     doublelinkedlist_insert_after_object(&l, 'F', '5');
     doublelinkedlist_print(&l);
 

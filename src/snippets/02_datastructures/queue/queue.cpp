@@ -20,6 +20,7 @@ namespace fom
         Queue::Queue()
         {
             // TODO
+            this->l = 0;  // initialize me !!!
         }
 
         Queue::~Queue()

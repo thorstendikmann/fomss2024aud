@@ -20,7 +20,7 @@ void somestrings()
     // Iterators
     for (std::string::const_iterator iter = greeting.begin();
          iter != greeting.end();
-         iter++)
+         ++iter)
     {
         std::cout << *iter << std::endl;
     }

@@ -22,7 +22,7 @@ public:
      *
      * @param val String zur internen Speicherung.
      */
-    Strang(const std::string &val);
+    explicit  Strang(const std::string &val);
 
     /**
      * @return Intern gespeicherter String.

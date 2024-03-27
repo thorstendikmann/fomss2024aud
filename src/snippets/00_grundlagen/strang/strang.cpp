@@ -2,9 +2,8 @@
 
 #include "strang.h"
 
-Strang::Strang(const std::string& val)
+Strang::Strang(const std::string& val): str(val)
 {
-    str =val;
 }
 
 std::string Strang::getString() const
