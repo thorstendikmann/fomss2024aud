@@ -1,0 +1,25 @@
+{
+	"name": "FOM-SS24-ALDS",
+	"image": "mcr.microsoft.com/devcontainers/cpp:ubuntu-22.04",
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {}
+	},
+	"postCreateCommand": "bash .devcontainer/setup.sh",
+	"runArgs": [
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined"
+	],
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			},
+			"extensions": [
+				"ms-vscode.cpptools-extension-pack",
+				"ms-python.python"
+			]
+		}
+	},
+	"remoteUser": "vscode"
+}

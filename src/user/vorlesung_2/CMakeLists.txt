@@ -1,0 +1,3 @@
+add_executable(vorlesung_2_fahrenheit_umrechnen fahrenheit_umrechnen.c)
+add_executable(vorlesung_2_speicherverwaltung_gefaerliches_programm speicherverwaltung_gefaerliches_programm.c)
+add_executable(vorlesung_2_helloworld helloworld.cpp)
