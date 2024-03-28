@@ -19,9 +19,3 @@ jobs:
           inline_suppression: enable
           enable: all
           other_options: --template=gcc --suppress=unusedFunction --suppress=redundantAssignment --suppress=variableScope --suppress=missingInclude
-
-      - name: publish report    
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'main'
