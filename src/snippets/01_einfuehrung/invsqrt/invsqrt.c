@@ -7,6 +7,7 @@
 // Surpress "warning: ‘y’ is used uninitialized [-Wuninitialized]"
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html
 #pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 #pragma GCC diagnostic ignored "-Wuninitialized"
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #pragma GCC diagnostic ignored "-Warray-bounds"
@@ -19,7 +20,7 @@
 float inv_sqrt(float number)
 {
     // Put your own inverse square root function here.
-    return 0.0;
+    return number;
 }
 
 /**
@@ -31,7 +32,7 @@ float inv_sqrt(float number)
 float Q_rsqrt(float number)
 {
     // Put your Quake inverse square root function here.
-    return 0.0;
+    return number;
 }
 
 // Return back to diagnostics settings before.

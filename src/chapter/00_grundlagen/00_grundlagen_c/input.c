@@ -24,7 +24,11 @@ void scanfInt(void)
 	int myNum;
 	char myChar;
 	printf("Gebe nummer UND ein Zeichen ein, z.B.  '9 c', '18 e': \n");
-	scanf("%d %c", &myNum, &myChar);
+	if (scanf("%d %c", &myNum, &myChar) != 2)
+	{
+		printf("Error!\n");
+		return;
+	}
 
 	printf("Eingabe: num %d und char %c\n", myNum, myChar);
 }
@@ -36,7 +40,11 @@ void scanfString(void)
 {
 	char name[21]; // max 20 + '\0'
 	printf("Gebe Name ein (max 20 Zeichen!!): \n");
-	scanf("%20s", name);
+	if (scanf("%20s", name) != 1)
+	{
+		printf("Error!\n");
+		return;
+	}
 
 	printf("Eingabe: %s\n", name);
 }
@@ -48,14 +56,18 @@ void fgetsString(void)
 {
 	char fullName[30];
 	printf("Gebe Vorname und Nachname ein (max 30 Zeichen!!): \n");
-	fgets(fullName, sizeof(fullName), stdin);
+	if (!fgets(fullName, sizeof(fullName), stdin))
+	{
+		printf("Error!\n");
+		return;
+	}
 
 	printf("Eingabe: %s\n", fullName);
 }
 
 int main(void)
 {
-    printf("Uncomment parts in source code.\n");
+	printf("Uncomment parts in source code.\n");
 	// // Uncomment
 	// countChars();
 	// scanfInt();

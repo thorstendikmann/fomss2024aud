@@ -24,7 +24,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # using GCC
     ## Yes, "-pedantic" without 'W', see https://gcc.gnu.org/onlinedocs/gcc-4.7.4/gcc/Warning-Options.html#index-pedantic-252
-    set(CMAKE_CXX_FLAGS "-g3 -ggdb -O0 -Wall -Wextra -pedantic -Werror")
+    set(CMAKE_CXX_FLAGS "-g3 -ggdb -O0 -Wall -Wextra -pedantic -Werror -Wstrict-aliasing")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
     # using Intel C++
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -34,7 +34,7 @@ endif()
 if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
     set(CMAKE_C_FLAGS "-g -Wall -Wextra -Werror")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
-    set(CMAKE_C_FLAGS "-g3 -ggdb -O0 -Wall -Wextra -pedantic -Werror -Wstrict-prototypes")
+    set(CMAKE_C_FLAGS "-g3 -ggdb -O0 -Wall -Wextra -pedantic -Werror -Wstrict-prototypes -Wstrict-aliasing")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "Intel")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
 endif()
@@ -47,8 +47,8 @@ endif(USE_LLD)
 
 
 MESSAGE(STATUS "CMAKE_BUILD_TYPE       = ${CMAKE_BUILD_TYPE}")
-MESSAGE(STATUS "CMAKE_C_COMPILER_ID    = ${CMAKE_C_COMPILER_ID}")
-MESSAGE(STATUS "CMAKE_CXX_COMPILER_ID  = ${CMAKE_CXX_COMPILER_ID}")
+MESSAGE(STATUS "CMAKE_C_COMPILER_ID    = ${CMAKE_C_COMPILER_ID} ${CMAKE_C_COMPILER_VERSION}")
+MESSAGE(STATUS "CMAKE_CXX_COMPILER_ID  = ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 MESSAGE(STATUS "CMAKE_INSTALL_PREFIX   = ${CMAKE_INSTALL_PREFIX}")
 MESSAGE(STATUS "BUILD_SHARED_LIBS      = ${BUILD_SHARED_LIBS}")
 MESSAGE(STATUS "CMAKE_C_FLAGS          = ${CMAKE_C_FLAGS}")

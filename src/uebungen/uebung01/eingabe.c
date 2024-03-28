@@ -11,7 +11,7 @@ void a_zahlenwerte(void)
     int y;
 
     printf("Gebe zwei ganze Zahlen ein: \n");
-    if (scanf("%d %d", &x, &y))
+    if (scanf("%d %d", &x, &y) == 2)
     {
         printf("Eingabe: %d, %d. Summe: %d\n", x, y, x + y);
         // Implicit conversion in pow!
@@ -35,7 +35,7 @@ void b_max(void)
     float f, g, h;
 
     printf("Gebe drei Fließkommazahlen ein: \n");
-    if (scanf("%f %f %f", &f, &g, &h))
+    if (scanf("%f %f %f", &f, &g, &h) == 3)
     {
         printf("Eingabe: %f, %f, %f. max: %f\n", f, g, h, MAX(MAX(f, g), h));
     }
@@ -113,15 +113,18 @@ void c_adresse(void)
 /** d)	Lesen Sie vom Benutzer drei Fließkommazahlen ein. Geben Sie an, ob sich aus diesen drei Zahlen ein Dreieck konstruieren lässt. */
 void d_dreiecke(void)
 {
-    float  x, y, z;
+    float x, y, z;
 
-    printf("\nInput three float numbers: "); 
-    scanf("%f %f %f", &x, &y, &z);
+    printf("\nInput three float numbers: ");
+    if (scanf("%f %f %f", &x, &y, &z) != 3)
+    {
+        printf("Error!");
+    }
 
     // Dreiecksungleichung für alle drei Seiten
-    if(x < (y+z) && y < (x+z) && z < (y+x))
-     {  
-        printf("The following form a triangle: %f, %f, %f", x,y,z);
+    if (x < (y + z) && y < (x + z) && z < (y + x))
+    {
+        printf("The following form a triangle: %f, %f, %f", x, y, z);
     }
     else
     {
