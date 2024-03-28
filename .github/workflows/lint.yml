@@ -1,10 +1,8 @@
 name: CMake on a single platform
 
+# Only start manually
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 env:
   BUILD_TYPE: Release

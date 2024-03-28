@@ -24,21 +24,22 @@ cd ~ && npm install doctoc
   - [Clone Repository](#clone-repository)
   - [Local Build Requirements](#local-build-requirements)
   - [Local Build Execution](#local-build-execution)
-  - [Add own source code](#add-own-source-code)
+  - [Add own source code (from scratch)](#add-own-source-code-from-scratch)
+  - [Work on exercises (from "snippets")](#work-on-exercises-from-snippets)
+- [Integrated Development Environment](#integrated-development-environment)
+  - [Running CMake in Visual Studio Code](#running-cmake-in-visual-studio-code)
+  - [Running Programs in VS Code](#running-programs-in-vs-code)
 - [Interacting with the repository](#interacting-with-the-repository)
   - [Cleaning the build folder](#cleaning-the-build-folder)
   - [Getting updates](#getting-updates)
   - [Reverting local changes](#reverting-local-changes)
-- [Integrated Development Environment](#integrated-development-environment)
-  - [Running CMake in Visual Studio Code](#running-cmake-in-visual-studio-code)
-  - [Running Programs in VS Code](#running-programs-in-vs-code)
 - [Optional parts](#optional-parts)
   - [Recommended addons](#recommended-addons)
     - [Boost](#boost)
     - [GoogleTest](#googletest)
     - [Doxygen](#doxygen)
     - [Valgrind](#valgrind)
-    - [cppchecker](#cppchecker)
+    - [cppcheck](#cppcheck)
   - [Docker-based Build Environment](#docker-based-build-environment)
     - [Installing Docker](#installing-docker)
     - [Building and Executing](#building-and-executing)
@@ -292,7 +293,7 @@ apt-get install valgrind
 valgrind bin/hello/hello_world_c
 ```
 
-#### cppchecker
+#### cppcheck
 
 Additional static code analysis tool to detect potential issues with the source code.
 
@@ -306,6 +307,7 @@ cppcheck src --force
 cppcheck src --force  --enable=all --suppress=unusedFunction --suppress=redundantAssignment --suppress=variableScope --suppress=missingInclude --inline-suppr --template=gcc
 ```
 
+<!--
 #### Visualization
 
 - For compiling and running the GUI examples, the following is needed:
@@ -317,6 +319,7 @@ apt-get install qt6-base-dev
 ```sh
 cmake .. -DWITH_VIS=ON
 ```
+-->
 
 ### Docker-based Build Environment
 
