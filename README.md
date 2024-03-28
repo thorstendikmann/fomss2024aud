@@ -303,7 +303,7 @@ apt-get install cppcheck
 ```sh
 cppcheck src --force
 # A good set of warnings for this lecture:
-cppcheck src --force  --enable=all --suppress=unusedFunction --suppress=redundantAssignment --suppress=variableScope --suppress=missingInclude --enable=style --inline-suppr --template=gcc
+cppcheck src --force  --enable=all --suppress=unusedFunction --suppress=redundantAssignment --suppress=variableScope --suppress=missingInclude --inline-suppr --template=gcc
 ```
 
 #### Visualization
