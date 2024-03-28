@@ -58,6 +58,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
 
     - name: Configure CMake - ubuntu-latest
+      if: matrix.os == 'ubuntu-latest'
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
@@ -66,6 +67,7 @@ jobs:
         -S ${{ github.workspace }}
         -DWITH_BOOST=ON -DWITH_GTEST=ON -DWITH_DOC=ON
     - name: Configure CMake - other
+      if: matrix.os != 'ubuntu-latest'
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
