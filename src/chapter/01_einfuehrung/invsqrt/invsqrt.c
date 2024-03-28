@@ -29,6 +29,8 @@ float inv_sqrt(float number)
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wuninitialized"
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic ignored "-Warray-bounds"
 /**
  * This is the id-Software Quake III "inverse squareroot" algorithm.
  * @return the inverse square root of number

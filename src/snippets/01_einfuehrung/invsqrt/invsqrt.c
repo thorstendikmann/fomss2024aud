@@ -8,7 +8,8 @@
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wuninitialized"
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic ignored "-Warray-bounds"
 
 /**
  * Calculates the inverse square root \f$ \frac{1}{\sqrt{(\mathrm{number})}} \f$ "by feet" - using pow and division.
