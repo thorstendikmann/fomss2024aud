@@ -1,5 +1,8 @@
 # README
 
+![CMake Multi Platform Build](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=main) 
+![cppcheck](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/cppcheck.yml/badge.svg?branch=main)
+
 This repository contains material and source code examples corresponding to the "Algorithm & Datastructures" lecture at FOM Hochschule für Oekonomie & Management gGmbH.
 
 The source code can be compiled "traditionally" utilizing CMake or conveniently compiled and executed in a Docker container.

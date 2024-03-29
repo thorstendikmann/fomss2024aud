@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(AuD  VERSION 1.0.0  DESCRIPTION "Algorithms & Datastructures examples")
+project(AuD  VERSION 0.1.0  DESCRIPTION "Algorithms & Datastructures examples")
 enable_language(C CXX)
 
 ##
@@ -19,6 +19,9 @@ if(WITH_ASM)
     #enable_language(ASM ASM_NASM)
     enable_language(ASM)
 endif(WITH_ASM)
+
+## Packaging
+include(CPack)
 
 ##
 ## Do all the work ...

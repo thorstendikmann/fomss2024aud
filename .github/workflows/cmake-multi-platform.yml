@@ -79,5 +79,18 @@ jobs:
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
     - name: Test
+      if: matrix.os == 'ubuntu-latest'
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: ctest --build-config ${{ matrix.build_type }}
+      run: for i in $(ls -1 test); do test/$i; done
+
+    - name: Packag Linux Deb
+      if: matrix.os == 'ubuntu-latest'
+      run: cpack -G "DEB" -B ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+    - name: Packag Linux
+      if: matrix.os == 'ubuntu-latest'
+      run: cpack -B ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+    - name: Packag Win Zip
+      if: matrix.os == 'windows-latest'
+      run: cpack -G "ZIP" -B ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}

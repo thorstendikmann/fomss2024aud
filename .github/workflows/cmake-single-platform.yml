@@ -34,4 +34,4 @@ jobs:
 
     - name: Test
       working-directory: ${{github.workspace}}/build
-      run: ctest -C ${{env.BUILD_TYPE}}
+      run: for i in $(ls -1 test); do test/$i; done
