@@ -36,6 +36,21 @@ include(CPack)
 ##
 add_subdirectory(src)
 
+# Install run.sh
+install(FILES
+${CMAKE_CURRENT_SOURCE_DIR}/scripts/run.sh
+${CMAKE_CURRENT_SOURCE_DIR}/scripts/rungtest.sh
+${CMAKE_CURRENT_SOURCE_DIR}/scripts/runvalgrind.sh
+    DESTINATION bin 
+        PERMISSIONS OWNER_READ
+        PERMISSIONS OWNER_WRITE
+        PERMISSIONS OWNER_EXECUTE
+        PERMISSIONS GROUP_READ
+        PERMISSIONS GROUP_EXECUTE
+        PERMISSIONS WORLD_READ
+        PERMISSIONS WORLD_EXECUTE
+)
+
 ##
 ## Doxygen
 ##

@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "Running valgrind for all files in $1"
-for i in $(find $1 -type f | sort | grep -v _input | grep -v _benchmark)
+for i in $(find $1 -executable -type f | sort | grep -v _input | grep -v _benchmark | grep -v boost | grep -v ".sh")
 do
-  echo "valgrind $1"
+  echo "valgrind $i"
   valgrind --track-origins=yes --leak-check=full --error-exitcode=1 --exit-on-first-error=yes $i
   if [ $? -ne 0 ]
   then

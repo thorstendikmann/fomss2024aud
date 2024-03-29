@@ -92,6 +92,7 @@ RUN     apk --no-cache add ca-certificates bash
 #       glibc & libstdc++.so.6 - See https://pet2cattle.com/2022/11/alpine-not-found
 RUN     apk --no-cache add libc6-compat libstdc++
 RUN     apk add --no-cache valgrind
+RUN     apk add --no-cache boost-dev
 RUN     apk add --no-cache python3 py3-pip
 
 ### No Cache from here
@@ -102,10 +103,14 @@ COPY    --from=buildenv /buildenv/destdir /app
 COPY    --from=buildenv /buildenv/app/src /app/src
 
 RUN     /app/bin/run.sh
+RUN     /app/bin/rungtest.sh /app/test
+RUN     /app/bin/runvalgrind.sh /app/bin
+
+CMD     /app/bin/run.sh
 
 ##
 ## Setup doc Webserver ... for fun
 ##
-FROM    m4rcu5/lighttpd    AS docserver
-
-COPY    --from=runner /app/share/doc/html /var/www/localhost/htdocs
+#FROM    m4rcu5/lighttpd    AS docserver
+#
+#COPY    --from=runner /app/share/doc/html /var/www/localhost/htdocs

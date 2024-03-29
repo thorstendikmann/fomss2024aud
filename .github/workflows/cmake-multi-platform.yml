@@ -82,11 +82,6 @@ jobs:
     - name: Build
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
-    - name: Test
-      if: matrix.os == 'ubuntu-latest'
-      working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: for i in $(ls -1 test); do test/$i; done
-
     - name: Packag Linux
       if: matrix.os == 'ubuntu-latest'
       run: cd ${{ steps.strings.outputs.build-output-dir }} && cpack

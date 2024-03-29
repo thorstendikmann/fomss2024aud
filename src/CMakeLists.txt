@@ -105,17 +105,6 @@ MACRO(td_include_subdirectories)
     ENDFOREACH()
 ENDMACRO()
 
-# Install run.sh
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/run.sh DESTINATION bin 
-        PERMISSIONS OWNER_READ
-        PERMISSIONS OWNER_WRITE
-        PERMISSIONS OWNER_EXECUTE
-        PERMISSIONS GROUP_READ
-        PERMISSIONS GROUP_EXECUTE
-        PERMISSIONS WORLD_READ
-        PERMISSIONS WORLD_EXECUTE
-)
-
 ## Boost
 if(WITH_BOOST)
     message("-- Searching for Boost libraries")
