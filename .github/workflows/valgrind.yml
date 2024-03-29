@@ -28,4 +28,4 @@ jobs:
 
     - name: Valgrind
       working-directory: ${{github.workspace}}/scripts
-      run: runvalgrind.sh ${{github.workspace}}/build/bin
+      run: ${{github.workspace}}/scripts/runvalgrind.sh ${{github.workspace}}/build/bin
