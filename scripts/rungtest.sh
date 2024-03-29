@@ -1,9 +1,9 @@
 #!/bin/bash
 echo "Running Google Test for all files in $1"
-for i in $(find $1 -type f | sort)
+for i in $(find $1 -type f)
 do
-  echo "Running $1"
-  $1
+  echo "Running $i"
+  $i
   if [ $? -ne 0 ]
   then
     echo "Google Test detected issues."
