@@ -6,38 +6,50 @@
 
 #if defined(__GNUC__) || defined(__clang__)
 // Ignore -Wunused-parameter while function not yet implemented - remove me
-#  pragma GCC diagnostic push
-#  pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 #endif
 
 void circular_buffer_print(const CircularBuffer *c)
 {
-    if (!c)
-        return;
-
-    // print all elements "left to right"
-    for (size_t i = 0; i < c->capacity; i++)
+    if (c && c->elements)
     {
-        printf("[");
+        // print all elements "left to right"
+        for (size_t i = 0; i < c->capacity; i++)
+        {
+            // Does current field contain data?
+            int valid = ((i + c->first) % c->capacity) < c->last;
 
-        // Indicate first and last field
-        if (i == c->first)
-        {
-            printf(">");
+            printf("[");
+
+            // Indicate first and last field
+            if (i == c->first)
+            {
+                printf(">");
+            }
+            if (valid || 1)
+            {
+                printf("%c", c->elements[i]);
+            }
+            else
+            {
+                printf(" ");
+            }
+            if (i == c->last)
+            {
+                printf("<");
+            }
+            printf("]");
         }
-        printf("%c", c->elements[i]);
-        if (i == c->last)
-        {
-            printf("<");
-        }
-        printf("]");
+        printf("\n");
     }
-    printf("\n");
 }
 
 void circular_buffer_init(CircularBuffer *c, size_t capacity)
 {
-    // TODO
+    // TODO!!
+    c->capacity = capacity;
+    c->elements = 0;
 }
 
 char circular_buffer_pop_front(CircularBuffer *c)
@@ -69,5 +81,5 @@ void circular_buffer_destroy(CircularBuffer *c)
 }
 
 #if defined(__GNUC__) || defined(__clang__)
-#  pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif

@@ -1,0 +1,31 @@
+name: valgrind
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Install Valgrind
+      run: sudo apt-get install -y valgrind
+    
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Valgrind
+      working-directory: ${{github.workspace}}/scripts
+      run: runvalgrind.sh ${{github.workspace}}/build/bin

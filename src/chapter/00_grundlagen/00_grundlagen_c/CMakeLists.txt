@@ -17,7 +17,7 @@ install(TARGETS input DESTINATION bin/c00)
 add_executable(pointer pointer.c)
 install(TARGETS pointer DESTINATION bin/c00)
 
-add_executable(fahrenheit fahrenheit.c)
-install(TARGETS fahrenheit DESTINATION bin/c00)
+add_executable(fahrenheit_input fahrenheit.c)
+install(TARGETS fahrenheit_input DESTINATION bin/c00)
 
 add_subdirectory("calculator")

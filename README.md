@@ -2,6 +2,8 @@
 
 ![CMake Multi Platform Build](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=main) 
 ![CMake Single Platform Build](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main) 
+![docker](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/valgrind.yml/badge.svg?branch=main)
+![valgrind](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/valgrind.yml/badge.svg?branch=main)
 ![cppcheck](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/cppcheck.yml/badge.svg?branch=main)
 
 This repository contains material and source code examples corresponding to the "Algorithm & Datastructures" lecture at FOM Hochschule für Oekonomie & Management gGmbH.

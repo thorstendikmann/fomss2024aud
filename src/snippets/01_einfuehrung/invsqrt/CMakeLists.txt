@@ -1,1 +1,1 @@
-add_executable(invsqrt_snp invsqrt.c)
+add_executable(invsqrt_benchmark_snp invsqrt.c)

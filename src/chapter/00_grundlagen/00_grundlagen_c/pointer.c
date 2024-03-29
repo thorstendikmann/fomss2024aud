@@ -180,6 +180,7 @@ void uebung_SpeicherverwaltungInC(void)
     // See Stroustrup, appendix B on compatibility.
     //int *iPtr = malloc(5 * sizeof(int));
     int *iPtr = calloc(5, sizeof(int)); // prefer initialized memory.
+    int *origPtr = iPtr;
     *iPtr++ = 10;
     *iPtr++ = 11;
     *iPtr++ = 12;
@@ -190,6 +191,8 @@ void uebung_SpeicherverwaltungInC(void)
     {
         printf("Current value: %d\n", *anotherPtr);
     }
+
+    free(origPtr);
 }
 
 int main(void)
@@ -199,7 +202,8 @@ int main(void)
     pointerUsage();
     pointerArithmeticsMultiDim();
     stringMagic();
-    memoryLeaker();
+    // // Commented, otherwise valgrind would complain :)
+    //memoryLeaker();
     uebung_SpeicherverwaltungInC();
 
     return 0;

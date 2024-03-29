@@ -32,6 +32,7 @@ float inv_sqrt(float number)
 #  pragma GCC diagnostic ignored "-Wuninitialized"
 #  pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #  pragma GCC diagnostic ignored "-Warray-bounds"
+#  pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 #endif
 /**
  * This is the id-Software Quake III "inverse squareroot" algorithm.
@@ -57,11 +58,6 @@ float Q_rsqrt(float number)
 
     return y;
 }
-
-// Return back to diagnostics settings before.
-#if defined(__GNUC__) || defined(__clang__)
-#  pragma GCC diagnostic pop
-#endif
 
 /**
  * Helper function to printf a given int in binary representation.
@@ -131,8 +127,6 @@ void benchmarkISqrtAlgs(void)
 
     runtime = ((double)t_stop - t_start) / CLOCKS_PER_SEC; // in seconds
     printf("Runtime %lf for Quake alg \n", runtime);
-
-    printf("Faking usage of res to avoid optimization %f \n", res);
 }
 
 /**
@@ -315,3 +309,8 @@ int main(void)
 
     return 0;
 }
+
+// Return back to diagnostics settings before.
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif
