@@ -5,7 +5,10 @@
 #include "queue.h"
 extern "C"
 {
-#include "../linkedlist/linkedlist.h"
+    // # This will reference linkedlist from snippets/02_datastructures !
+    #include "../linkedlist/linkedlist.h"
+    // // # This will reference linkedlist from chapter/02_datastructures !
+    // #include "../linkedlist/linkedlist.h"
 }
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
