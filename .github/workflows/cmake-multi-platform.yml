@@ -1,4 +1,4 @@
-name: CMake on multiple platforms
+name: CMake Multi Platform Build
 
 on:
   push:
@@ -85,12 +85,12 @@ jobs:
 
     - name: Packag Linux Deb
       if: matrix.os == 'ubuntu-latest'
-      run: cpack -G "DEB" -B ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      run: cpack -G "DEB" -B ${{ steps.strings.outputs.build-output-dir }}
 
     - name: Packag Linux
       if: matrix.os == 'ubuntu-latest'
-      run: cpack -B ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      run: cpack -B ${{ steps.strings.outputs.build-output-dir }}
 
     - name: Packag Win Zip
       if: matrix.os == 'windows-latest'
-      run: cpack -G "ZIP" -B ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      run: cpack -G "ZIP" -B ${{ steps.strings.outputs.build-output-dir }}
