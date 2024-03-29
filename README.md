@@ -1,7 +1,7 @@
 # README
 
 ![CMake Multi Platform Build](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=main) 
-![docker](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/valgrind.yml/badge.svg?branch=main)
+![docker](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/docker.yml/badge.svg?branch=main)
 ![gtest](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/gtest.yml/badge.svg?branch=main)
 ![valgrind](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/valgrind.yml/badge.svg?branch=main)
 ![cppcheck](https://github.com/thorstendikmann/fomss2024aud/actions/workflows/cppcheck.yml/badge.svg?branch=main)

@@ -87,10 +87,6 @@ jobs:
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
       run: for i in $(ls -1 test); do test/$i; done
 
-#    - name: Packag Linux Deb
-#      if: matrix.os == 'ubuntu-latest'
-#      run: cpack -G "DEB" -B ${{ steps.strings.outputs.build-output-dir }}
-
     - name: Packag Linux
       if: matrix.os == 'ubuntu-latest'
       run: cd ${{ steps.strings.outputs.build-output-dir }} && cpack
