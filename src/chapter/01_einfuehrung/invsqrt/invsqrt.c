@@ -27,10 +27,12 @@ float inv_sqrt(float number)
 
 // Surpress "warning: ‘y’ is used uninitialized [-Wuninitialized]"
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wuninitialized"
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#pragma GCC diagnostic ignored "-Warray-bounds"
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wuninitialized"
+#  pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#  pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
 /**
  * This is the id-Software Quake III "inverse squareroot" algorithm.
  * @return the inverse square root of number
@@ -57,7 +59,9 @@ float Q_rsqrt(float number)
 }
 
 // Return back to diagnostics settings before.
-#pragma GCC diagnostic pop
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif
 
 /**
  * Helper function to printf a given int in binary representation.

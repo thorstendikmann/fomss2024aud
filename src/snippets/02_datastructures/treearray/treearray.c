@@ -93,9 +93,11 @@ void tree_print(TreeArray *t)
     tree_print_node(t, 0, 0);
 }
 
-#pragma GCC diagnostic push
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic push
 // Ignore -Wunused-parameter while function not yet implemented - remove me
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+#  pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 
 void tree_print_dfs_preorder(TreeArray *t, size_t i)
 {
@@ -115,7 +117,9 @@ void tree_print_dfs_inorder(TreeArray *t, size_t i)
     printf("##### TODO\n");
 }
 
-#pragma GCC diagnostic pop
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif
 
 void tree_print_array(TreeArray *t)
 {

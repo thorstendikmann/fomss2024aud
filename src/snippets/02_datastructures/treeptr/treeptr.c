@@ -5,8 +5,10 @@
 
 #include "treeptr.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 
 void tree_initialize(TreePtr *t)
 {
@@ -18,4 +20,6 @@ void tree_destroy(TreePtr *t)
     // TODO!
 }
 
-#pragma GCC diagnostic pop
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif

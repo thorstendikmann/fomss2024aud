@@ -213,7 +213,9 @@ OUT:
 
 // Macros
 #define VALUE 134.3
-#define max(A, B) ((A) > (B) ? (A) : (B))
+#ifndef _WIN32
+	#define max(A, B) ((A) > (B) ? (A) : (B))
+#endif
 
 /**
  * Shows how preprocessor macros can be used.

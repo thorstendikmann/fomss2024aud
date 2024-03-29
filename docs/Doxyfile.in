@@ -6,7 +6,7 @@ OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/doc/
 INPUT                  = @PROJECT_SOURCE_DIR@/
 QUIET                  = YES
 RECURSIVE              = YES
-EXTRACT_ALL            = YES
+EXTRACT_ALL            = NO
 GENERATE_LATEX         = NO
 USE_MATHJAX            = YES
 

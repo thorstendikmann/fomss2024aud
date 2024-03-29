@@ -6,11 +6,13 @@
 
 // Surpress "warning: ‘y’ is used uninitialized [-Wuninitialized]"
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-#pragma GCC diagnostic ignored "-Wuninitialized"
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#pragma GCC diagnostic ignored "-Warray-bounds"
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wunused-parameter"
+#  pragma GCC diagnostic ignored "-Wuninitialized"
+#  pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#  pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
 
 /**
  * Calculates the inverse square root \f$ \frac{1}{\sqrt{(\mathrm{number})}} \f$ "by feet" - using pow and division.
@@ -36,7 +38,9 @@ float Q_rsqrt(float number)
 }
 
 // Return back to diagnostics settings before.
-#pragma GCC diagnostic pop
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif
 
 /**
  * Benchmarks two inverse sqare root algorithms with each other.

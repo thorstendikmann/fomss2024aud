@@ -89,15 +89,19 @@ char array_pop_back(Array* a)
     return array_remove(a, a->size - 1);
 }
 
-#pragma GCC diagnostic push
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic push
 // Ignore -Wunused-parameter while function not yet implemented - remove me
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+#  pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 char array_remove(Array* a, int idx)
 {
     // TODO
     return '\0';
 }
-#pragma GCC diagnostic pop
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif
 
 int array_find(Array* a, const char c)
 {

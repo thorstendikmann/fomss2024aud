@@ -10,8 +10,10 @@ extern "C"
     // // # This will reference linkedlist from chapter/02_datastructures !
     // #include "../linkedlist/linkedlist.h"
 }
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 
 // avoid prefixing std::
 using namespace std;
@@ -50,4 +52,6 @@ namespace fom
     }
 }
 
-#pragma GCC diagnostic pop
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif

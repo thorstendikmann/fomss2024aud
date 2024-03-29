@@ -86,8 +86,11 @@ node *linkedlist_insert_after(LinkedList *l, node *item, char value)
 
     return new_item;
 }
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 
 char linkedlist_remove_after(LinkedList *l, node *item)
 {
@@ -101,4 +104,6 @@ size_t linkedlist_size(const LinkedList *l)
     return 0;
 }
 
-#pragma GCC diagnostic pop
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif

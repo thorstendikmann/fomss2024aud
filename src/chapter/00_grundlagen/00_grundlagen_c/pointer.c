@@ -42,6 +42,8 @@ void simplePointerWithChar(void)
     // printf("numPtr points to adress %p - value %d\n", numPtr, *numPtr);
 }
 
+// C2057
+#define MAX_ELEM 10
 /**
  * Do some pointer arithmetics.
  * Stepwise increase one pointer and see what happens to its address and the dereferenced value.
@@ -49,8 +51,6 @@ void simplePointerWithChar(void)
 void pointerUsage(void)
 {
     printf("- %s, %d\n", __func__, __LINE__);
-
-    int MAX_ELEM = 10;
 
     // Define some array of ints and fill it
     int numbs[MAX_ELEM];
@@ -87,21 +87,20 @@ void pointerArithmeticsMultiDim(void)
     printf("- %s, %d\n", __func__, __LINE__);
 
     // Define and fill the array
-    int maxElem = 15;
-    int x[maxElem][maxElem];
+    int x[MAX_ELEM][MAX_ELEM];
 
-    for (int i = 0; i < maxElem; i++)
+    for (int i = 0; i < MAX_ELEM; i++)
     {
-        for (int j = 0; j < maxElem; j++)
+        for (int j = 0; j < MAX_ELEM; j++)
         {
             x[i][j] = i + j * j;
         }
     }
 
     // "Debug" Output
-    for (int i = 0; i < maxElem; i++)
+    for (int i = 0; i < MAX_ELEM; i++)
     {
-        for (int j = 0; j < maxElem; j++)
+        for (int j = 0; j < MAX_ELEM; j++)
         {
             printf("%3.1d ", x[i][j]);
         }
@@ -110,11 +109,11 @@ void pointerArithmeticsMultiDim(void)
 
     printf("    x   points to adress %p - value %d\n", (void*) x, x[0][0]);
     // Iterate with pointer over diagonal elements
-    for (int i = 0; i < maxElem; i++)
+    for (int i = 0; i < MAX_ELEM; i++)
     {
         // Calculate the position
         //        -------------v start ----v row -----v column
-        int *pos = (int *)(&x[0][0] + (i * maxElem) + i);
+        int *pos = (int *)(&x[0][0] + (i * MAX_ELEM) + i);
         printf("%d - pos points to adress %p - value %d\n", i, (void*) pos, *pos);
     }
 }

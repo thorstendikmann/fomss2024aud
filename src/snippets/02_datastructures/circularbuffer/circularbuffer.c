@@ -4,9 +4,11 @@
 
 #include "circularbuffer.h"
 
+#if defined(__GNUC__) || defined(__clang__)
 // Ignore -Wunused-parameter while function not yet implemented - remove me
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 
 void circular_buffer_print(const CircularBuffer *c)
 {
@@ -66,4 +68,6 @@ void circular_buffer_destroy(CircularBuffer *c)
     // TODO
 }
 
-#pragma GCC diagnostic pop
+#if defined(__GNUC__) || defined(__clang__)
+#  pragma GCC diagnostic pop
+#endif

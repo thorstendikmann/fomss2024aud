@@ -1,11 +1,13 @@
 #include <stdio.h>
 
+// Do as preprocessor const due to C2057
+#define MAX_ELEM 6
+
 /**
  * Just defining and filling a 1D array with some elements and printing them afterwards.
  */
 void arrays1d(void)
 {
-    int MAX_ELEM = 6;
     float measurements[MAX_ELEM];
 
     measurements[0] = 17.0;
@@ -44,27 +46,28 @@ void arraysLength(void)
     }
 }
 
+// C2057
+#define MAX_X 15
+#define MAX_Y 15
 /**
  * Show usage of 2D arrays in C - iterate over them, put some values in and print the final result.
  */
 void arrays2d(void)
 {
-    int max_x = 15;
-    int max_y = 15;
-    int x[max_x][max_y];
+    int x[MAX_X][MAX_Y];
 
-    for (int i = 0; i < max_x; i++)
+    for (int i = 0; i < MAX_X; i++)
     {
-        for (int j = 0; j < max_y; j++)
+        for (int j = 0; j < MAX_Y; j++)
         {
             x[i][j] = i + j;
         }
     }
 
     // Output
-    for (int i = 0; i < max_x; i++)
+    for (int i = 0; i < MAX_X; i++)
     {
-        for (int j = 0; j < max_y; j++)
+        for (int j = 0; j < MAX_Y; j++)
         {
             printf("%2.1d ", x[i][j]);
         }

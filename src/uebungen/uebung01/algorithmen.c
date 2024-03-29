@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * a) Schreiben Sie ein Programm, welches die geraden Nummern zwischen 1 und 50 (inkl.) ausgibt.
@@ -82,9 +83,9 @@ void primeNumbersSieveOfEratosthenes(int maxNumber, char output)
 
     // Create array where we keep track of a number having dividers
     // "1" at a position => number is prime.
-    char prime[maxNumber + 1];
+	char* prime = malloc((maxNumber+1) * sizeof(char));
     // Initialize all with "is prime"
-    memset(prime, 1, sizeof(prime));
+    memset(prime, 1, (maxNumber+1) * sizeof(char));
 
     // Loop until sqrt(maxNumber) => p * p <= maxNumber faster than sqrt!
     for (int p = 2; p * p <= maxNumber; p++)
@@ -111,6 +112,8 @@ void primeNumbersSieveOfEratosthenes(int maxNumber, char output)
             if (prime[p])
                 printf("Prime: %d\n", p);
     }
+
+    free(prime);
 }
 
 #include <time.h>

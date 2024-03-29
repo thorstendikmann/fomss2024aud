@@ -43,6 +43,7 @@ cd ~ && npm install doctoc
   - [Docker-based Build Environment](#docker-based-build-environment)
     - [Installing Docker](#installing-docker)
     - [Building and Executing](#building-and-executing)
+  - [Windows-native builds](#windows-native-builds)
   - [Playgrounds](#playgrounds)
     - [Assembler & Qemu](#assembler--qemu)
     - [Rust](#rust)
@@ -351,6 +352,20 @@ make docker       # build & run
 ```
 - Running the image will execute [run.sh](src/run.sh) inside the image - The script just calls a couple of compiled programs.
 - The [Dockerfile](Dockerfile) also contains a section to automatically start a "documentation server" - this will be available at [localhost:8080/](http://localhost:8080/) then.
+
+### Windows-native builds
+
+- In general, setting up a C/C++ development environment is much easier in Linux/Unix or when utilizing Windows Subsystem for Linux than trying to compile "natively" on Windows. This is especially true when including third-party libraries where no standards exists where header include files or binary libraries can be found in the system. A native Windows build therefore is _not recommended_!
+- Ignoring this: for running a native Windows build, first download and install [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (Section "Tools for Visual Studio"). Ensure at a minimum the following will be installed: "Desktop development with C++".
+- After installation, open a "Developer PowerShell for VS 2022".
+- Navigate to your repository folder, create a `build` subdirectory and run CMake:
+```ps
+cd $env:USERPROFILE\workspace\fomss2024aud    # or whatever this is for you
+mkdir build
+cd build
+cmake -G "NMake Makefiles" ..
+nmake
+```
 
 
 ### Playgrounds
