@@ -1,0 +1,36 @@
+// // Guide:
+// Using Images, Dockerfiles, and Docker Compose: https://containers.dev/guide/dockerfile
+// Developing inside a Container: https://code.visualstudio.com/docs/devcontainers/containers
+{
+	"name": "DevContainer",
+	//"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	//"image": "takker289/devenv:fomaud-ubuntu-noble",
+	// "build": {
+	// 	"dockerfile": "Dockerfile",
+	// 	"context": ".."
+	// },
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "devcontainer",
+	"remoteUser": "ubuntu",
+	"workspaceFolder": "/workspace",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cmake-tools",
+				"ms-vscode.makefile-tools",
+				"ms-toolsai.jupyter",
+				"ms-python.python",
+				"ms-python.debugpy",
+				"ms-python.vscode-pylance",
+				"redhat.vscode-yaml",
+				"ms-azuretools.vscode-docker",
+				"GitHub.vscode-github-actions",
+				"ms-vscode-remote.remote-containers"
+			],
+			"settings": {
+				"python.pythonPath": "/opt/venv/bin/python3"
+			}
+		}
+	}
+}

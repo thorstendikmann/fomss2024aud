@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  devcontainer:
+    image: takker289/devenv:fomaud-ubuntu-noble
+    #user: dev
+    user: ubuntu
+
+    volumes:
+      - ..:/workspace/:cached
+    #network_mode: service:db
+    command: sleep infinity
