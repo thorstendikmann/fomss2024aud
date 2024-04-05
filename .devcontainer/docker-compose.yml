@@ -1,9 +1,8 @@
 version: '3.8'
 services:
   devcontainer:
-    image: takker289/devenv:fomaud-ubuntu-noble
-    #user: dev
-    user: ubuntu
+    image: ghcr.io/tak289/devenv:fomaud-ubuntu.noble
+    user: dev
 
     volumes:
       - ..:/workspace/:cached

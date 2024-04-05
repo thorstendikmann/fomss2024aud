@@ -11,7 +11,7 @@
 	// },
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "devcontainer",
-	"remoteUser": "ubuntu",
+	"remoteUser": "dev",
 	"workspaceFolder": "/workspace",
 	"customizations": {
 		"vscode": {
