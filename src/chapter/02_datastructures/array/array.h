@@ -89,4 +89,10 @@ int array_find(Array *a, char c);
  */
 void array_destroy(Array *a);
 
+/**
+ * Prints content of an Array to stdout in Graphviz format.
+ * @param a the array to be printed.
+ */
+void array_print_graphviz(const Array *a);
+
 #endif // ARRAY_H_

@@ -245,3 +245,54 @@ node *linkedlist_find_previous(LinkedList *l, const node *item)
     }
     return 0;
 }
+
+void linkedlist_print_graphviz(const LinkedList *l)
+{
+    printf("digraph g {\n");
+    printf("graph [\n");
+    printf("  rankdir = \"LR\"\n");
+    printf("];\n");
+
+    printf("\"%p\" [\n", (void *)l->head);
+    printf("    label = \"<f0> %p | <f1> Head\"\n", (void *)l->head);
+    printf("    style = \"filled\"\n");
+    printf("    fillcolor = \"#9dc4c4\"\n");
+    printf("    shape = \"record\"\n");
+    printf("];\n");
+
+    // Nodes
+    {
+        node *curPtr = l->head->next;
+        while (curPtr != 0 && curPtr != l->tail)
+        {
+            printf("\"%p\" [\n", (void *)curPtr);
+            printf("    label = \"<f0> %p | <f1> %c\"\n", (void *)curPtr, *(curPtr->value));
+            printf("    shape = \"record\"");
+            printf("];\n");
+
+            curPtr = curPtr->next;
+        }
+    }
+
+    printf("\"%p\" [\n", (void *)l->tail);
+    printf("    label = \"<f0> %p | <f1> Tail\"\n", (void *)l->tail);
+    printf("    style = \"filled\"\n");
+    printf("    fillcolor = \"#9dc4c4\"\n");
+    printf("    shape = \"record\"\n");
+    printf("];\n");
+
+    // Links
+    {
+        node *curPtr = l->head;
+        printf("\"%p\" -> \"%p\"\n", (void *)curPtr, (void *)curPtr->next);
+        curPtr = curPtr->next;
+        
+        while (curPtr != 0 && curPtr != l->tail)
+        {
+            printf("\"%p\" -> \"%p\"\n", (void *)curPtr, (void *)curPtr->next);
+            curPtr = curPtr->next;
+        }
+    }
+    printf("}\n");
+    printf("\n");
+}

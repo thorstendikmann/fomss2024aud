@@ -25,15 +25,15 @@ void array_init(Array *a, int capacity)
 {
     a->capacity = capacity;
     a->size = 0;
-    a->elements = (char*) malloc(capacity);
+    a->elements = (char *)malloc(capacity);
 }
 
-void array_resize(Array* a, int new_capacity)
+void array_resize(Array *a, int new_capacity)
 {
     if (new_capacity != a->capacity)
     {
         // Allocate new memory
-        char* new_elements = (char*)malloc(new_capacity);
+        char *new_elements = (char *)malloc(new_capacity);
         // Copy data from old to new memory
         memcpy(new_elements, a->elements, a->size);
         // // "Manual way":
@@ -68,9 +68,9 @@ void array_insert(Array *a, int idx, char value)
     a->size++;
 }
 
-char* array_at(const Array *a, int idx)
+char *array_at(const Array *a, int idx)
 {
-    if((idx > a->capacity) || (idx > a->size))
+    if ((idx > a->capacity) || (idx > a->size))
     {
         printf("Out of bounds.");
         return "\0";
@@ -79,17 +79,17 @@ char* array_at(const Array *a, int idx)
     return &(a->elements[idx]);
 }
 
-void array_push_back(Array* a, char value)
+void array_push_back(Array *a, char value)
 {
     array_insert(a, a->size, value);
 }
 
-char array_pop_back(Array* a)
+char array_pop_back(Array *a)
 {
     return array_remove(a, a->size - 1);
 }
 
-char array_remove(Array* a, int idx)
+char array_remove(Array *a, int idx)
 {
     // Save element to be removed
     char temp = a->elements[idx];
@@ -104,14 +104,14 @@ char array_remove(Array* a, int idx)
     // Shrink if needed
     if (a->size <= a->capacity / 4)
     {
-        int new_capacity = (a->capacity / 2) + 1 ;
+        int new_capacity = (a->capacity / 2) + 1;
         array_resize(a, new_capacity);
     }
 
     return temp;
 }
 
-int array_find(Array* a, char c)
+int array_find(Array *a, char c)
 {
     for (int i = 0; i < a->capacity; i++)
     {
@@ -128,4 +128,37 @@ void array_destroy(Array *a)
     a->capacity = 0;
     a->size = 0;
     free(a->elements);
+}
+
+void array_print_graphviz(const Array *a)
+{
+    char separator = '|';
+
+    printf("graph array\n");
+    printf("{\n");
+
+    printf("    Array [ shape = record, label = \"{");
+    for (int i = 0; i < a->capacity; i++)
+    {
+        char sep = i == (a->capacity - 1) ? ' ' : separator;
+        if (i < a->size)
+        {
+            printf("%c %c ", a->elements[i], sep);
+        }
+        else
+        {
+            printf(" %c", sep);
+        }
+    }
+    printf("}\"] ;\n");
+
+    printf("    notes [ shape = record, color = white, label = \"{");
+    for (int i = 0; i < a->capacity; i++)
+    {
+        char sep = i == (a->capacity - 1) ? ' ' : separator;
+        printf("%d %c ", i, sep);
+    }
+    printf("}\" ];\n");
+
+    printf("}\n\n");
 }

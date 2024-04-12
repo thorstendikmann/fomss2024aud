@@ -69,6 +69,13 @@ size_t linkedlist_size(const LinkedList *l);
 void linkedlist_print(const LinkedList *l);
 
 /**
+ * Prints all LinkedList elements to stdout in a Graphviz format.
+ *
+ * @param l LinkedList to be printed.
+ */
+void linkedlist_print_graphviz(const LinkedList *l);
+
+/**
  * Empty given LinkedList.
  * @param l LinkedList list to operate on.
  */
