@@ -1,0 +1,11 @@
+add_library(treearray treearray.c)
+set_target_properties(treearray PROPERTIES PUBLIC_HEADER "treearray.h")
+install(TARGETS treearray PUBLIC_HEADER DESTINATION include/treearray)
+
+add_executable(treearray_test treearray_test.c)
+if (NOT WIN32)
+    target_link_libraries(treearray_test treearray m)
+else()
+    target_link_libraries(treearray_test treearray)
+endif()
+install(TARGETS treearray_test DESTINATION bin/c02)
