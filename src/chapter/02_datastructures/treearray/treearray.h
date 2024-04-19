@@ -65,6 +65,18 @@ size_t tree_set_right(TreeArray *t, char value, size_t parent);
 char tree_remove(TreeArray *t, size_t parent);
 
 /**
+ * Initializes a tree from a given array.
+ * 
+ * Note: <tt>values</tt> can be free'd right after this call.
+ * All values will be deep copied to internal data structure.
+ *
+ * @param t TreeArray to work with.
+ * @param values pointer to the first value of the array.
+ * @return the number of elements in the array.
+ */
+void tree_initialize_fromArray(TreeArray *t, char* values, size_t size);
+
+/**
  * Print the tree in a tree-like structure.
  * @param t TreeArray to work with.
  */
@@ -75,6 +87,13 @@ void tree_print(TreeArray *t);
  * @param t TreeArray to work with.
  */
 void tree_print_array(TreeArray *t);
+
+/**
+ * Print the tree as graphviz source.
+ * @param t TreeArray to work with.
+ * @param rootElem the element in the array to start with. If rootElem == 0, the graphviz header will be printed.
+ */
+void tree_print_graphviz(TreeArray *t, size_t rootElem);
 
 /**
  * "Low-level" print tree elements following DFS-traversal, preorder.

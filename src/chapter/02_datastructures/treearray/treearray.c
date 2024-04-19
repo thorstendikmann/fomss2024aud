@@ -20,6 +20,14 @@ void tree_initialize(TreeArray *t, size_t max_depth)
     t->max_depth = max_depth;
 }
 
+void tree_initialize_fromArray(TreeArray *t, char *values, size_t size)
+{
+    size_t max_depth = (size_t)log2(size);
+
+    tree_initialize(t, max_depth);
+    memcpy(t->elements, values, size * sizeof(char));
+}
+
 void tree_destroy(TreeArray *t)
 {
     free(t->elements);
@@ -119,7 +127,6 @@ void tree_print_dfs_postorder(TreeArray *t, size_t i)
     }
 }
 
-
 void tree_print_dfs_inorder(TreeArray *t, size_t i)
 {
     if (i >= tree_getMaxNumberOfElements(t->max_depth))
@@ -148,4 +155,41 @@ void tree_print_array(TreeArray *t)
         }
     }
     printf("\n");
+}
+
+void tree_print_graphviz(TreeArray *t, size_t rootElem)
+{
+    if (rootElem >= tree_getMaxNumberOfElements(t->max_depth))
+        return;
+
+    if (rootElem == 0)
+    {
+        printf("digraph Tree {\n");
+        printf("    node [shape = Mrecord,height=.1];\n");
+    }
+
+    printf("    \"node_%c\" [label = \"<f0> |<f1> %c |<f2> \" ];\n", (t->elements[rootElem]), (t->elements[rootElem]));
+
+    // Print all child nodes
+    if (rootElem * 2 + 2 < tree_getMaxNumberOfElements(t->max_depth))
+    {
+        if (t->elements[rootElem * 2 + 1])
+            tree_print_graphviz(t, rootElem * 2 + 1);
+        if (t->elements[rootElem * 2 + 2])
+            tree_print_graphviz(t, rootElem * 2 + 2);
+    }
+
+    // Print all child connections
+    if (rootElem * 2 + 2 < tree_getMaxNumberOfElements(t->max_depth))
+    {
+        if (t->elements[rootElem * 2 + 1])
+            printf("    \"node_%c\":f0 -> \"node_%c\":f1;\n", (t->elements[rootElem]), (t->elements[rootElem * 2 + 1]));
+        if (t->elements[rootElem * 2 + 2])
+            printf("    \"node_%c\":f2 -> \"node_%c\":f1;\n", (t->elements[rootElem]), (t->elements[rootElem * 2 + 2]));
+    }
+
+    if (rootElem == 0)
+    {
+        printf("}\n");
+    }
 }
