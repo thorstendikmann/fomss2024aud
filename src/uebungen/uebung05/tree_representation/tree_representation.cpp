@@ -39,6 +39,9 @@ int main()
         tree_initialize_fromArray(&tree, values, size);
         tree_print_array(&tree);
         tree_print_graphviz(&tree, 0);
+
+        tree_destroy(&tree);
+        free(values);
     }
     std::cout << "#----- Tree Array II." << std::endl;
     {
@@ -68,6 +71,9 @@ int main()
         tree_initialize_fromArray(&tree, values, size);
         tree_print_array(&tree);
         tree_print_graphviz(&tree, 0);
+
+        tree_destroy(&tree);
+        free(values);
     }
 
     std::cout << "#----- Binary Tree." << std::endl;
