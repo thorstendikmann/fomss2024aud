@@ -1,0 +1,7 @@
+add_library(radixsortstringarray radixsortstringarray.cpp radixsortstringarray.h)
+set_target_properties(radixsortstringarray PROPERTIES PUBLIC_HEADER "radixsortstringarray.h")
+install(TARGETS radixsortstringarray PUBLIC_HEADER DESTINATION include/radixsortstringarray)
+
+add_executable(radixsortstringarray_test radixsortstringarray_test.cpp)
+target_link_libraries(radixsortstringarray_test radixsortstringarray)
+install(TARGETS radixsortstringarray_test DESTINATION bin/c03)

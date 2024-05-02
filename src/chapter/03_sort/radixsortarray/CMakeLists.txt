@@ -1,0 +1,7 @@
+add_library(radixsortarray radixsortarray.cpp radixsortarray.h)
+set_target_properties(radixsortarray PROPERTIES PUBLIC_HEADER "radixsortarray.h")
+install(TARGETS radixsortarray PUBLIC_HEADER DESTINATION include/radixsortarray)
+
+add_executable(radixsortarray_test radixsortarray_test.cpp)
+target_link_libraries(radixsortarray_test radixsortarray)
+install(TARGETS radixsortarray_test DESTINATION bin/c03)

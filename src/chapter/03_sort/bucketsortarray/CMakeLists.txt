@@ -1,0 +1,7 @@
+add_library(bucketsortarray bucketsortarray.cpp bucketsortarray.h)
+set_target_properties(bucketsortarray PROPERTIES PUBLIC_HEADER "bucketsortarray.h")
+install(TARGETS bucketsortarray PUBLIC_HEADER DESTINATION include/bucketsortarray)
+
+add_executable(bucketsortarray_test bucketsortarray_test.cpp)
+target_link_libraries(bucketsortarray_test bucketsortarray)
+install(TARGETS bucketsortarray_test DESTINATION bin/c03)
