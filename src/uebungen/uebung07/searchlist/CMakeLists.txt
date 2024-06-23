@@ -1,0 +1,3 @@
+add_executable(searchorderedlist searchorderedlist.cpp)
+target_link_libraries(searchorderedlist searcharray)
+install(TARGETS searchorderedlist DESTINATION bin/u07)
