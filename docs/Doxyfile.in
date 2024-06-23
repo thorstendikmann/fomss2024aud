@@ -30,4 +30,5 @@ EXCLUDE_PATTERNS       = */.svn/* \
                          */build/* \
                          */build* \
                          */obj/* \
-                         */target/*
+                         */target/* \
+                         declarations.hpp
