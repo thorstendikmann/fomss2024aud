@@ -48,6 +48,10 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
+    - name: apt-update
+      run: sudo apt-get update
+      if: matrix.os == 'ubuntu-latest'
+
     - name: Install boost
       run: sudo apt-get install -y libboost-all-dev
       if: matrix.os == 'ubuntu-latest'

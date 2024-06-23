@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: apt-update
+      run: sudo apt-get update
 
     - name: Install boost
       run: sudo apt-get install -y libboost-all-dev
