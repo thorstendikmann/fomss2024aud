@@ -211,7 +211,7 @@ namespace fom
             }
 
             //  binary search for the found range.
-            std::size_t steps;
+            std::size_t steps = 0;
             return this->search_binary_rec(steps, val, i / 2, std::min(i, n - 1));
         }
     }
