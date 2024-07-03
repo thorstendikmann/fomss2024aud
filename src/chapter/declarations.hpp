@@ -21,6 +21,7 @@ typedef struct Array
 
 void array_init(Array *a, int capacity);
 void array_destroy(Array *a);
+void array_resize(Array *a, int new_capacity);
 void array_insert(Array *a, int idx, char value);
 void array_push_back(Array *a, char value);
 char array_remove(Array *a, int idx);
@@ -143,6 +144,7 @@ public:
     std::string traverseDFS_inorder() const;
     std::string traverseBFS() const;
 
+protected:
     node *left;
     node *right;
     T value;
